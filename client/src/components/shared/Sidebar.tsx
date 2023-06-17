@@ -2,13 +2,14 @@ import {
   AdminPanelSettingsOutlined,
   CalendarMonthOutlined,
   ChevronLeft,
+  ChevronRightOutlined,
   HomeOutlined,
   PieChartOutline,
   PointOfSaleOutlined,
   PublicOutlined,
   ShoppingCartOutlined,
-  TheatersOutlined,
   TodayOutlined,
+  TrendingUpOutlined,
 } from "@mui/icons-material";
 import {
   Box,
@@ -18,6 +19,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
+  ListItemText,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -99,13 +101,8 @@ const Sidebar: React.FC<Props> = (props) => {
                       }}
                       sx={{
                         backgroundColor:
-                          active === lcText
-                            ? theme.palette.background.paper
-                            : "transparent",
-                        color:
-                          active === lcText
-                            ? theme.palette.primary.main
-                            : theme.palette.secondary.main,
+                          active === lcText ? "#0E2954" : "transparent",
+                        color: active === lcText ? "white" : "white",
                       }}
                     >
                       <ListItemIcon
@@ -113,13 +110,20 @@ const Sidebar: React.FC<Props> = (props) => {
                           p: "0 2rem",
                           color:
                             active === lcText
-                              ? theme.palette.primary.main
+                              ? "#2E8A99"
                               : theme.palette.secondary.main,
                         }}
                       >
                         {icon}
                       </ListItemIcon>
-                      <Typography>{text}</Typography>
+                      <ListItemText primary={text} />
+                      {active === lcText && (
+                        <ChevronRightOutlined
+                          sx={{
+                            ml: "auto",
+                          }}
+                        />
+                      )}
                     </ListItemButton>
                   </ListItem>
                 );
@@ -152,5 +156,5 @@ const navItems: NavItem[] = [
   { text: "Breakdown", icon: <PieChartOutline /> },
   { text: "Management", icon: null },
   { text: "Admin", icon: <AdminPanelSettingsOutlined /> },
-  { text: "Performance", icon: <PointOfSaleOutlined /> },
+  { text: "Performance", icon: <TrendingUpOutlined /> },
 ];

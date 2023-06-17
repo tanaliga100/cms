@@ -42,7 +42,9 @@ const Navbar: React.FC<Props> = (props) => {
       >
         {/* LEFT-SIDE  */}
         <FlexRowWrapper>
-          <IconButton onClick={() => console.log("open side bar")}>
+          <IconButton
+            onClick={() => props.setIsSideBarOpen(!props.isSideBarOpen)}
+          >
             <MenuIcon />
           </IconButton>
           <FlexRowWrapper
