@@ -1,3 +1,5 @@
+import { TypeBackground } from "@mui/material";
+
 // color design tokens export
 export const tokensDark = {
   grey: {
@@ -61,7 +63,7 @@ function reverseTokens(tokensDark: string) {
 export const tokensLight = reverseTokens(tokensDark as any | string[]);
 
 // mui theme settings
-export const themeSettings = (mode: any) => {
+export const themeSettings = (mode: any | string) => {
   return {
     palette: {
       mode: mode,

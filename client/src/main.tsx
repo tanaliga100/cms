@@ -10,6 +10,9 @@ const store = configureStore({
     global: themeReducer,
   },
 });
+// TYPES
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
