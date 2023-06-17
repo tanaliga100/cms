@@ -7,12 +7,14 @@ import {
   PieChartOutline,
   PointOfSaleOutlined,
   PublicOutlined,
+  SettingsOutlined,
   ShoppingCartOutlined,
   TodayOutlined,
   TrendingUpOutlined,
 } from "@mui/icons-material";
 import {
   Box,
+  Divider,
   Drawer,
   IconButton,
   List,
@@ -26,14 +28,34 @@ import {
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
+import profile from "/src/assets/profile-modified.png";
 
+interface IUser {
+  v: number;
+  _id: string;
+  city: string;
+  country: string;
+  createdAt: string;
+  email: string;
+  name: string;
+  occupation: string;
+  password: string;
+  phoneNumber: number;
+  role: string;
+  state: string;
+  transactions: string[];
+  updatedAt: string;
+}
 interface Props {
+  user: IUser;
   isNonMobile: boolean;
   drawerWidth: string;
   isSideBarOpen: boolean;
   setIsSideBarOpen: Dispatch<SetStateAction<boolean>>;
 }
 const Sidebar: React.FC<Props> = (props) => {
+  // console.log(props);
+
   const { pathname } = useLocation();
   const [active, setActive] = useState<string>("");
 
@@ -85,7 +107,7 @@ const Sidebar: React.FC<Props> = (props) => {
                   return (
                     <Typography
                       key={text}
-                      sx={{ m: "2.25rem 0 1rem 3rem", fontSize: "1.2rem" }}
+                      sx={{ m: "1rem 0 1rem 1rem", fontSize: "1.2rem" }}
                     >
                       {text}
                     </Typography>
@@ -131,6 +153,46 @@ const Sidebar: React.FC<Props> = (props) => {
                 );
               })}
             </List>
+          </Box>
+          {/* DISPLAY USER HERE  */}
+          <Box position="absolute" bottom="0">
+            <Divider />
+            <FlexRowWrapper
+              textTransform="none"
+              gap="1rem"
+              m="1.rem 2rem 0 3rem"
+            >
+              <Box
+                component="img"
+                alt="profile"
+                src={profile}
+                width="40px"
+                height="40px"
+                borderRadius="50%"
+                sx={{
+                  objectFit: "cover",
+                }}
+              />
+              <Box textAlign="center">
+                <Typography
+                  fontWeight="bold"
+                  fontSize="1rem"
+                  // sx={{ color: "white" }}
+                >
+                  {props.user.name || "Dummy"}
+                </Typography>
+                <Typography
+                  fontWeight=".8rem"
+                  fontSize="1rem"
+                  // sx={{ color: "white" }}
+                >
+                  {props.user.occupation || "Dummy"}
+                </Typography>
+              </Box>
+              <SettingsOutlined
+                sx={{ color: theme.palette.secondary.main, fontSize: "25px" }}
+              />
+            </FlexRowWrapper>
           </Box>
         </Drawer>
       )}

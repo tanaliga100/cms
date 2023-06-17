@@ -10,5 +10,6 @@ export default defineConfig({
   },
   define: {
     "process.env.PORT": `${process.env.PORT}`,
+    "process.env.BASE_URL": `${process.env.BASE_URL}`,
   },
 });

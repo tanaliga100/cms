@@ -48,7 +48,7 @@ var helmet_1 = __importDefault(require("helmet"));
 var morgan_1 = __importDefault(require("morgan"));
 var connect_1 = require("./config/connect");
 var client_routes_1 = __importDefault(require("./routes/client.routes"));
-var generals_routes_1 = __importDefault(require("./routes/generals.routes"));
+var general_routes_1 = __importDefault(require("./routes/general.routes"));
 var management_routes_1 = __importDefault(require("./routes/management.routes"));
 var sales_routes_1 = __importDefault(require("./routes/sales.routes"));
 // CONFIGURATIONS
@@ -65,10 +65,10 @@ app.use((0, cors_1.default)());
 app.get("/", function (req, res) {
     res.json({ msg: "Server Alive" });
 });
-app.use("/client", client_routes_1.default);
-app.use("/generals", generals_routes_1.default);
-app.use("/management", management_routes_1.default);
-app.use("/sales", sales_routes_1.default);
+app.use("/api/v1/client", client_routes_1.default);
+app.use("/api/v1/general", general_routes_1.default);
+app.use("/api/v1/management", management_routes_1.default);
+app.use("/api/v1/sales", sales_routes_1.default);
 // INVOCATIONS
 var start = function () { return __awaiter(void 0, void 0, void 0, function () {
     var port, error_1;
@@ -82,12 +82,14 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
                 return [4 /*yield*/, (0, connect_1.connectDB)(process.env.MONGO_URL)];
             case 2:
                 _a.sent();
+                // User.insertMany(dataUser);
                 app.listen(port, function () {
                     console.log("DB ESTABLISHED_ALIVE @: ".concat(port));
                 });
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();
+                console.log(error_1);
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
         }

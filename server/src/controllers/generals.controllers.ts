@@ -6,8 +6,13 @@ const GET_USER = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const params = req.params;
     console.log(params);
-    res.status(200).send("User Existed");
-    const user = await User.find();
+    const user = await User.findById(params.id);
+
+    // VALIDATION HERE AND RETURN
+    if (!user) {
+      return res.status(404).json({ message: `User ${params.id} not founds` });
+    }
+    return res.status(200).json({ message: "Success", user: user });
   } catch (error: any) {
     res.status(404).json({ message: error.message });
   }
