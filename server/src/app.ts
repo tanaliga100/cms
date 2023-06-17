@@ -2,7 +2,7 @@
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
-import express from "express";
+import express, { Request, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connectDB } from "./config/connect";
@@ -17,12 +17,15 @@ const app = express();
 app.use(express.json());
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
-app.use(morgan("common"));
+app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
 
 // ROUTES
+app.get("/", (req: Request, res: Response) => {
+  res.json({ msg: "Server Alive" });
+});
 app.use("/client", clientRoutes);
 app.use("/generals", generalRoutes);
 app.use("/management", managementRoutes);

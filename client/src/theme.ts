@@ -105,7 +105,7 @@ export const themeSettings = (mode: unknown) => {
               main: tokensDark.grey[500],
             },
             background: {
-              default: tokensDark.grey[0],
+              default: tokensDark.grey[50],
               alt: tokensDark.grey[50],
             },
           }),

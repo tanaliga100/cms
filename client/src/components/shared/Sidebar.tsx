@@ -100,9 +100,11 @@ const Sidebar: React.FC<Props> = (props) => {
                         setActive(lcText);
                       }}
                       sx={{
-                        backgroundColor:
-                          active === lcText ? "#0E2954" : "transparent",
-                        color: active === lcText ? "white" : "white",
+                        backgroundColor: active === lcText ? "#DBDFAA" : "none",
+                        color:
+                          active === lcText
+                            ? theme.palette.primary.main
+                            : theme.palette.secondary.main,
                       }}
                     >
                       <ListItemIcon
@@ -110,7 +112,7 @@ const Sidebar: React.FC<Props> = (props) => {
                           p: "0 2rem",
                           color:
                             active === lcText
-                              ? "#2E8A99"
+                              ? theme.palette.primary.main
                               : theme.palette.secondary.main,
                         }}
                       >
