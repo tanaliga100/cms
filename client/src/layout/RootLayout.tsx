@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";
 import Sidebar from "../components/shared/Sidebar";
 const RootLayout = () => {
-  const isNonMobile = useMediaQuery("min-width: 500px");
+  const isNonMobile = useMediaQuery("(width > 600px)");
   const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
   return (
@@ -15,7 +15,7 @@ const RootLayout = () => {
         isSideBarOpen={isSideBarOpen}
         setIsSideBarOpen={setIsSideBarOpen}
       />
-      <Box>
+      <Box flexGrow={1}>
         <Navbar
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}

@@ -23,7 +23,7 @@ interface Props {
   setIsSideBarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const Navbar: React.FC<Props> = ({ ...props }) => {
+const Navbar: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
   const theme = useTheme();
 
