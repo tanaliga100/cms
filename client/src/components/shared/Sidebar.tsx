@@ -67,7 +67,7 @@ const Sidebar: React.FC<Props> = (props) => {
               <FlexRowWrapper color={theme.palette.secondary.main}>
                 <Box display="flex" alignItems="center" gap=".5rem">
                   <Typography variant="h3" fontWeight="bolder">
-                    EcomVision
+                    xBlast-Admin
                   </Typography>
                 </Box>
                 {!props.isNonMobile && (
