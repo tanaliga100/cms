@@ -155,12 +155,24 @@ const Sidebar: React.FC<Props> = (props) => {
             </List>
           </Box>
           {/* DISPLAY USER HERE  */}
-          <Box position="absolute" bottom="0">
-            <Divider />
+          <Box
+            position="sticky"
+            bottom="0"
+            width="100%"
+            sx={{
+              zIndex: 1,
+              // background: "transparent",
+              background: "transparent", // Updat
+              backdropFilter: "blur(50px)",
+              color: theme.palette.secondary.main,
+            }}
+          >
+            <Divider sx={{}} />
             <FlexRowWrapper
               textTransform="none"
-              gap="1rem"
-              m="1.rem 2rem 0 3rem"
+              padding="1.3rem"
+              gap=".5rem"
+              // m="1.rem 2rem 0 3rem"
             >
               <Box
                 component="img"
