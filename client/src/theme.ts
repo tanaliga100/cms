@@ -1,7 +1,17 @@
 import { PaletteColor, Theme, TypeBackground } from "@mui/material";
 
 // color design tokens export
-export const tokensDark = {
+export const tokensDark: {
+  grey: {
+    [key: number]: string;
+  };
+  primary: {
+    [key: number]: string;
+  };
+  secondary: {
+    [key: number]: string;
+  };
+} = {
   grey: {
     0: "#ffffff", // manually adjusted
     10: "#f6f6f6", // manually adjusted
@@ -45,7 +55,11 @@ export const tokensDark = {
 };
 
 // function that reverses the color palette
-function reverseTokens(tokensDark: string) {
+function reverseTokens(tokensDark: {
+  [key: string]: {
+    [key: string]: string;
+  };
+}) {
   const reversedTokens = {} as { [key: string]: { [key: string]: string } };
   Object.entries(tokensDark).forEach(([key, val]) => {
     const keys = Object.keys(val);
@@ -60,10 +74,10 @@ function reverseTokens(tokensDark: string) {
   });
   return reversedTokens as { [key: string]: { [key: string]: string } }; // Type assertion added
 }
-export const tokensLight = reverseTokens(tokensDark as any | string[]);
+export const tokensLight = reverseTokens(tokensDark as any | string);
 
 // mui theme settings
-export const themeSettings = (mode: unknown) => {
+export const themeSettings = (mode: any) => {
   return {
     palette: {
       mode: mode,

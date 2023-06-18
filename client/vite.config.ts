@@ -6,10 +6,10 @@ dotenv.config();
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: Number(process.env.PORT) || 3001,
+    port: parseInt(process.env.PORT) || 3000,
   },
   define: {
     "process.env.PORT": `${process.env.PORT}`,
-    "process.env.BASE_URL": `${process.env.BASE_URL}`,
+    "process.env.BASE_URL": `"${process.env.BASE_URL}"`,
   },
 });

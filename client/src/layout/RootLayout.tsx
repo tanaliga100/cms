@@ -14,15 +14,21 @@ const RootLayout = () => {
   const userId = useSelector((state: RootState) => state.global.userId);
   const data = useGetUserQuery(userId);
 
+  // CHECK STATUS BEFORE PASSING AS PROPS
+
   return (
     <Box width="100%" height="100%" display={isNonMobile ? "flex" : "block"}>
-      <Sidebar
-        user={(data && data.data.user) || {}}
-        isNonMobile={isNonMobile}
-        drawerWidth="250px"
-        isSideBarOpen={isSideBarOpen}
-        setIsSideBarOpen={setIsSideBarOpen}
-      />
+      {data.isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <Sidebar
+          user={data?.data?.user || {}}
+          isNonMobile={isNonMobile}
+          drawerWidth="250px"
+          isSideBarOpen={isSideBarOpen}
+          setIsSideBarOpen={setIsSideBarOpen}
+        />
+      )}
       <Box flexGrow={1}>
         <Navbar
           // user={data || {}}
