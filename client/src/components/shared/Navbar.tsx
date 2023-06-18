@@ -8,17 +8,25 @@ import {
 } from "@mui/icons-material";
 import {
   AppBar,
+  Box,
+  Button,
   IconButton,
   InputBase,
+  Menu,
+  MenuItem,
   Toolbar,
+  Typography,
   useTheme,
 } from "@mui/material";
-import { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setMode } from "../../state";
+import { IUser } from "../../types";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
+import profile from "/src/assets/profile-modified.png";
 
 interface Props {
+  user: IUser;
   isSideBarOpen: boolean;
   setIsSideBarOpen: Dispatch<SetStateAction<boolean>>;
 }
@@ -26,6 +34,15 @@ interface Props {
 const Navbar: React.FC<Props> = (props) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const isOpen = Boolean(anchorEl);
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(e.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <AppBar
@@ -70,7 +87,67 @@ const Navbar: React.FC<Props> = (props) => {
               <LightModeOutlined sx={{ fontSize: "25px" }} />
             )}
           </IconButton>
-          <SettingsOutlined sx={{ fontSize: "25px" }} />
+          <IconButton>
+            <SettingsOutlined sx={{ fontSize: "25px" }} />
+          </IconButton>
+          <FlexRowWrapper>
+            <Button
+              onClick={handleClick}
+              sx={{
+                display: "flex",
+                justtifyContent: "space-between",
+                alignItems: "center",
+                textTransform: "none",
+                gap: "1rem",
+                background: "transparent", // Updat
+                backdropFilter: "blur(50px)",
+                color: theme.palette.secondary.main,
+              }}
+            >
+              <Box
+                component="img"
+                alt="profile"
+                src={profile}
+                width="40px"
+                height="40px"
+                borderRadius="50%"
+                sx={{
+                  objectFit: "cover",
+                }}
+              />
+              <Box
+                textAlign="center"
+                sx={{ display: "flex", gap: "1rem", alignItems: "center" }}
+              >
+                <Typography
+                  fontWeight="bold"
+                  fontSize="1rem"
+                  // sx={{ color: "white" }}
+                >
+                  {props.user.name || "jordantanaliga100"}
+                </Typography>
+                <Typography
+                  fontWeight=".8rem"
+                  fontSize="1rem"
+                  // sx={{ color: "white" }}
+                >
+                  {props.user.occupation || "Software Developer"}
+                </Typography>
+                <IconButton>
+                  <ArrowDropDownOutlined sx={{ fontSize: "30px" }} />
+                </IconButton>
+              </Box>
+            </Button>
+            <Menu
+              anchorEl={anchorEl}
+              open={isOpen}
+              onClose={handleClose}
+              anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+            >
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>Log Out</MenuItem>
+            </Menu>
+          </FlexRowWrapper>
         </FlexRowWrapper>
       </Toolbar>
     </AppBar>

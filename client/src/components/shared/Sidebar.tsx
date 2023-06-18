@@ -27,25 +27,10 @@ import {
 } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { IUser } from "../../types";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
 import profile from "/src/assets/profile-modified.png";
 
-interface IUser {
-  v: number;
-  _id: string;
-  city: string;
-  country: string;
-  createdAt: string;
-  email: string;
-  name: string;
-  occupation: string;
-  password: string;
-  phoneNumber: number;
-  role: string;
-  state: string;
-  transactions: string[];
-  updatedAt: string;
-}
 interface Props {
   user: IUser;
   isNonMobile: boolean;
@@ -185,20 +170,20 @@ const Sidebar: React.FC<Props> = (props) => {
                   objectFit: "cover",
                 }}
               />
-              <Box textAlign="center">
+              <Box textAlign="center" sx={{}}>
                 <Typography
                   fontWeight="bold"
                   fontSize="1rem"
                   // sx={{ color: "white" }}
                 >
-                  {props.user.name || "Dummy"}
+                  {props.user.name || "jordantanaliga100"}
                 </Typography>
                 <Typography
                   fontWeight=".8rem"
                   fontSize="1rem"
                   // sx={{ color: "white" }}
                 >
-                  {props.user.occupation || "Dummy"}
+                  {props.user.occupation || "Software Developer"}
                 </Typography>
               </Box>
               <SettingsOutlined

@@ -24,17 +24,21 @@ const RootLayout = () => {
         <Sidebar
           user={data?.data?.user || {}}
           isNonMobile={isNonMobile}
-          drawerWidth="250px"
+          drawerWidth="300px"
           isSideBarOpen={isSideBarOpen}
           setIsSideBarOpen={setIsSideBarOpen}
         />
       )}
       <Box flexGrow={1}>
-        <Navbar
-          // user={data || {}}
-          isSideBarOpen={isSideBarOpen}
-          setIsSideBarOpen={setIsSideBarOpen}
-        />
+        {data.isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <Navbar
+            user={data?.data?.user || {}}
+            isSideBarOpen={isSideBarOpen}
+            setIsSideBarOpen={setIsSideBarOpen}
+          />
+        )}
         {/* ENTIRETY OF THE PAGE  */}
         <Outlet />
       </Box>
