@@ -133,9 +133,7 @@ const Navbar: React.FC<Props> = (props) => {
                 >
                   {props.user.occupation || "Software Developer"}
                 </Typography>
-                <IconButton>
-                  <ArrowDropDownOutlined sx={{ fontSize: "30px" }} />
-                </IconButton>
+                <ArrowDropDownOutlined sx={{ fontSize: "30px" }} />
               </Box>
             </Button>
             <Menu

@@ -6,7 +6,9 @@ import express, { Request, Response } from "express";
 import helmet from "helmet";
 import morgan from "morgan";
 import { connectDB } from "./config/connect";
-import { dataUser } from "./data";
+import { dataProduct, dataProductStat, dataUser } from "./data";
+import Product from "./models/product.model";
+import ProductStat from "./models/productStats.model";
 import User from "./models/user.model";
 import clientRoutes from "./routes/client.routes";
 import generalRoutes from "./routes/general.routes";
@@ -39,6 +41,9 @@ const start = async () => {
   try {
     await connectDB(process.env.MONGO_URL as string);
     // User.insertMany(dataUser);
+    // Product.insertMany(dataProduct);
+    // ProductStat.insertMany(dataProductStat);
+
     app.listen(port, () => {
       console.log(`DB ESTABLISHED_ALIVE @: ${port}`);
     });

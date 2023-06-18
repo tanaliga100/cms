@@ -7,6 +7,7 @@ import "./App.css";
 import RootLayout from "./layout/RootLayout";
 import { RootState } from "./main";
 import DashboardPage from "./pages/DashboardPage";
+import ProductsPage from "./pages/ProductsPage";
 import { themeSettings } from "./theme";
 function App() {
   const mode = useSelector((state: RootState) => state.global.mode);
@@ -20,6 +21,7 @@ function App() {
           <Route element={<RootLayout />}>
             <Route path="/" element={<Navigate to="dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
+            <Route path="/products" element={<ProductsPage />} />
           </Route>
         </Routes>
       </ThemeProvider>

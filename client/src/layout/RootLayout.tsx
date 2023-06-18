@@ -21,6 +21,7 @@ const RootLayout = () => {
       {data.isLoading ? (
         <div>Loading...</div>
       ) : (
+
         <Sidebar
           user={data?.data?.user || {}}
           isNonMobile={isNonMobile}
@@ -33,6 +34,7 @@ const RootLayout = () => {
         {data.isLoading ? (
           <div>Loading...</div>
         ) : (
+
           <Navbar
             user={data?.data?.user || {}}
             isSideBarOpen={isSideBarOpen}

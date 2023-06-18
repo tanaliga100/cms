@@ -83,6 +83,8 @@ var start = function () { return __awaiter(void 0, void 0, void 0, function () {
             case 2:
                 _a.sent();
                 // User.insertMany(dataUser);
+                // Product.insertMany(dataProduct);
+                // ProductStat.insertMany(dataProductStat);
                 app.listen(port, function () {
                     console.log("DB ESTABLISHED_ALIVE @: ".concat(port));
                 });

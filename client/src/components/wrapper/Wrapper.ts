@@ -13,3 +13,10 @@ export const FlexColumnWrapper = styled(Box)({
   justifyContent: "space-between",
   alignItems: "center",
 });
+
+export const LoadingWrapper = styled(Box)({
+  display: "flex",
+  width: "100%",
+  height: "100%",
+  textAlign: "center",
+});
