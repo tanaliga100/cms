@@ -72,9 +72,26 @@ const Sidebar: React.FC<Props> = (props) => {
           <Box width="100%">
             <Box m="1.5rem 2rem 2rem 3rem">
               <FlexRowWrapper color={theme.palette.secondary.main}>
-                <Box display="flex" alignItems="center" gap=".5rem">
-                  <Typography variant="h3" fontWeight="bolder">
-                    xBlast-Admin
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  gap=".5rem"
+                  justifyContent="center"
+                >
+                  <Typography
+                    variant="h2"
+                    fontFamily="Helvetica"
+                    fontWeight="bolder"
+                    display="flex"
+                    textAlign="center"
+                    justifyContent="space-between"
+                  >
+                    <span
+                      style={{ color: "crimson", padding: "0 .5rem 0 1px" }}
+                    >
+                      100
+                    </span>
+                    <span>Vision</span>
                   </Typography>
                 </Box>
                 {!props.isNonMobile && (
