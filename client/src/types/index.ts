@@ -45,6 +45,7 @@ export interface IStats {
 }
 export interface IProducts {
   stat?: IStats[];
-  product: IProduct;
+  ctx?: string;
+  product?: IProduct;
   key?: number | string;
 }

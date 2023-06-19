@@ -63,7 +63,9 @@ const RootLayout = () => {
         {data.isLoading ? (
           <LoadingWrapper isLoading={data.isLoading} />
         ) : (
-          <Outlet />
+          <>
+            <Outlet />
+          </>
         )}
       </Box>
     </Box>

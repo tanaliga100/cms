@@ -1,11 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import { Box, IconButton, Typography } from "@mui/material";
 import { Link, Outlet } from "react-router-dom";
 import { FlexRowWrapper } from "../components/wrapper/Wrapper";
-import { IProducts } from "../types";
+import { IProduct, IProducts } from "../types";
 import StatsView from "./StatsView";
 
 const ProductsView: React.FC<IProducts> = (props) => {
-  // console.log("EACH", props);
   const {
     __v,
     _id,
@@ -17,29 +18,44 @@ const ProductsView: React.FC<IProducts> = (props) => {
     rating,
     supply,
     updatedAt,
-  } = props.product;
+  } = props.product as IProduct;
 
   // const {} = props.stats;
 
   // console.log("productsView", props);
   return (
-    // <Box
-    //   boxShadow="0px 1px 0px 1px white"
-    //   padding="1rem"
-    //   width="100%"
-    //   display="flex"
-    // >
-    <FlexRowWrapper>
-      <Typography variant="h6" fontWeight="bolder">
-        {name}
-      </Typography>
-      <Typography>{category}</Typography>
-      <Typography>{price}</Typography>
-      <Typography>{rating}</Typography>
-      <Link to={`/products/${_id}`}> see more</Link>
-      <Outlet context={props.stat} />
+    <FlexRowWrapper gap="2rem">
+      <FlexRowWrapper flexGrow={1}>
+        <Typography variant="h6" fontWeight="bolder">
+          {name}
+        </Typography>
+        <Typography>{category}</Typography>
+        <Typography>{price}</Typography>
+        <Typography>{rating}</Typography>
+      </FlexRowWrapper>
+      <FlexRowWrapper>
+        <Link
+          // to={`/products/${_id}`}
+          to="."
+          className="linkGreen"
+        >
+          {" "}
+          <IconButton>
+            <EditIcon color="success" />
+          </IconButton>
+        </Link>
+        <Link
+          // to={`/products/${_id}`}
+          to="."
+          className="linkRed"
+        >
+          {" "}
+          <IconButton>
+            <DeleteIcon color="error" />
+          </IconButton>
+        </Link>
+      </FlexRowWrapper>
     </FlexRowWrapper>
-    // </Box>
   );
 };
 

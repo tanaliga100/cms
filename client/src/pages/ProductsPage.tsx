@@ -13,8 +13,8 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React from "react";
-import { useOutlet, useOutletContext } from "react-router-dom";
+import React, { useContext } from "react";
+import { Outlet, useOutlet, useOutletContext } from "react-router-dom";
 import Product from "../../../server/src/models/product.model";
 import Hero from "../components/shared/Hero";
 import {
@@ -30,9 +30,6 @@ const ProductsPage = () => {
   // CALL THE API
   const { currentData, data, isLoading, isSuccess, isError, error } =
     useGetProductsQuery(undefined);
-  // console.log("data", data);
-  const ctx = useOutletContext();
-  console.log(ctx);
 
   const isNonMobile = useMediaQuery("(width > 600px)");
 
@@ -41,30 +38,30 @@ const ProductsPage = () => {
 
   return (
     <Box>
-      <Hero
+      {/* <Hero
         title="PRODUCTS"
         subtitle="List of all the Products"
         isLoading={isLoading}
-      />
+      /> */}
       {/* // HANDLE LOADING... */}
       {data || !isLoading ? (
         // DISPLAY PRODUCTS HERE...
 
-        // <Box
-        //   mt="20px"
-        //   display="grid"
-        //   gridTemplateColumns="repeat(3, minmax(0, 1fr))"
-        //   justifyContent="space-between"
-        //   rowGap="20px"
-        //   columnGap="1.33%"
-        //   padding="0 1.5rem"
-        //   sx={{
-        //     "& > div": {
-        //       gridColumn: isNonMobile ? undefined : "span 4",
-        //     },
-        //   }}
-        // >
-        <FlexColumnWrapper padding="0 1.5rem">
+        <Box
+          mt="20px"
+          display="flex"
+          flexDirection="column"
+          // gridTemplateColumns="repeat(3, minmax(0, 1fr))"
+          justifyContent="space-between"
+          rowGap="20px"
+          columnGap="1.33%"
+          padding="0 1.5rem"
+          sx={{
+            "& > div": {
+              gridColumn: isNonMobile ? undefined : "span 4",
+            },
+          }}
+        >
           {data.withStats.map((product: IProducts, index: number) => {
             // console.log(product);
             // return null;
@@ -76,11 +73,11 @@ const ProductsPage = () => {
               />
             );
           })}
-        </FlexColumnWrapper>
+        </Box>
       ) : (
-        // </Box>
         <LoadingWrapper isLoading={isLoading} />
       )}
+      <Outlet />
     </Box>
   );
 };

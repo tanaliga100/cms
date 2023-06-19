@@ -1,5 +1,6 @@
 import { Dashboard } from "@mui/icons-material";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { orange } from "@mui/material/colors";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import Hero from "../components/shared/Hero";
@@ -12,6 +13,10 @@ const ProductsLayout = () => {
   // CALL THE API
   const data = useGetProductsQuery(undefined);
 
+  const dummy = {
+    title: "OverView",
+  };
+  const theme = useTheme();
   return (
     <Box>
       <Hero
@@ -21,9 +26,9 @@ const ProductsLayout = () => {
       />
       <Box display="flex" justifyContent="" gap="4rem" padding="0 1.5rem">
         <NavLink
+          end
           className={({ isActive }) => (isActive ? "linkActive" : "link")}
           to="."
-          relative="path"
         >
           Overview
         </NavLink>
@@ -34,16 +39,10 @@ const ProductsLayout = () => {
           {" "}
           Stats
         </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "linkActive" : "link")}
-          to="/pricing"
-        >
-          {" "}
-          Category
-        </NavLink>
       </Box>
       <Box>
-        <Outlet context={data} />
+        {/* <Outlet /> */}
+        <Outlet />
       </Box>
     </Box>
   );

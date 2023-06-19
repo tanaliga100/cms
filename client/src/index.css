@@ -10,9 +10,27 @@ body,
 }
 .link {
   font-size: large;
+  font-weight: 700;
   text-decoration: none;
 }
 .linkActive {
+  font-weight: 700;
+  font-size: large;
   text-decoration: none;
   color: crimson;
+}
+.linkGreen {
+  color: green;
+  border: none;
+  text-decoration: none;
+  padding: 0.3em 1em;
+  border-radius: 5px;
+}
+
+.linkRed {
+  color: crimson;
+  border: none;
+  text-decoration: none;
+  padding: 0.3em 1em;
+  border-radius: 5px;
 }
