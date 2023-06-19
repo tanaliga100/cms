@@ -11,11 +11,11 @@ interface IProps {
 const Hero: React.FC<IProps> = (props) => {
   const theme = useTheme();
   return (
-    <>
+    <Box>
       {props.isLoading ? (
         <LoadingWrapper isLoading={props.isLoading} />
       ) : (
-        <Box m="1rem  1.5rem 2rem 1.5rem">
+        <Box m="3rem  1.5rem 3rem 1.5rem">
           <Typography
             variant="h3"
             color={theme.palette.primary.contrastText}
@@ -37,7 +37,7 @@ const Hero: React.FC<IProps> = (props) => {
           </Typography>
         </Box>
       )}
-    </>
+    </Box>
   );
 };
 

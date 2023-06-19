@@ -47,9 +47,11 @@ const Navbar: React.FC<Props> = (props) => {
   return (
     <AppBar
       sx={{
-        position: "static",
+        position: "sticky",
         background: "none",
-        boxShadow: "none",
+        boxShadow: "0px 0px -1px 0 grey",
+        backgroundColor: "transparent",
+        backdropFilter: "blur(300px)",
       }}
     >
       <Toolbar
@@ -65,9 +67,11 @@ const Navbar: React.FC<Props> = (props) => {
             <MenuIcon />
           </IconButton>
           <FlexRowWrapper
-            sx={{
-              backgroundColor: theme.palette.background.default || "grey",
-            }}
+            sx={
+              {
+                // backgroundColor: theme.palette.background.default || "grey",
+              }
+            }
             gap="3rem"
             borderRadius="109x"
             borderBottom="1px dotted white"

@@ -27,10 +27,10 @@ import {
 } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import logo from "../../assets/Cms100.png";
 import { IUser } from "../../types";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
 import profile from "/src/assets/profile-modified.png";
-
 interface Props {
   user: IUser;
   isNonMobile: boolean;

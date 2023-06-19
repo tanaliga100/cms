@@ -1,5 +1,5 @@
 import { Dashboard } from "@mui/icons-material";
-import { Box, useTheme } from "@mui/material";
+import { Box, Divider, useTheme } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
@@ -40,6 +40,7 @@ const ProductsLayout = () => {
           Stats
         </NavLink>
       </Box>
+      <Divider sx={{ padding: ".5rem" }} light />
       <Box>
         {/* <Outlet /> */}
         <Outlet />

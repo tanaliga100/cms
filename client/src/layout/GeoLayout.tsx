@@ -5,7 +5,7 @@ import Hero from "../components/shared/Hero";
 const GeoLayout = () => {
   return (
     <Box>
-      <Hero title="GEOGRAPHT" subtitle="List of all the customers were in" />
+      <Hero title="GEOGRAPHY" subtitle="List of all the customers were in" />
     </Box>
   );
 };
