@@ -11,8 +11,9 @@ export const FlexRowWrapper = styled(Box)({
 export const FlexColumnWrapper = styled(Box)({
   display: "flex",
   flexDirection: "column",
-  justifyContent: "space-between",
-  alignItems: "center",
+  justifyContent: "center",
+  alignItems: "space-between",
+  gap: "1rem",
 });
 
 interface IProps {

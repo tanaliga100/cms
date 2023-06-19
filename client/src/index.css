@@ -8,3 +8,11 @@ body,
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
 }
+.link {
+  font-size: large;
+  text-decoration: none;
+}
+.linkActive {
+  text-decoration: none;
+  color: crimson;
+}

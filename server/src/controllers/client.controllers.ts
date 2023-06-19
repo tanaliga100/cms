@@ -20,14 +20,16 @@ export const GET_PRODUCTS = async (
           productId: product._id,
         });
         return {
-          ...product,
+          product,
           stat,
         };
       })
     );
-    res
-      .status(200)
-      .json({ counts: products.length, products: productWithStats });
+    res.status(200).json({
+      counts: products.length,
+      products: products,
+      withStats: productWithStats,
+    });
   } catch (error: unknown) {
     if (error instanceof Error) {
       res.status(404).json({ message: error.message });

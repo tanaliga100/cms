@@ -19,3 +19,32 @@ export interface IUser {
   transactions: string[];
   updatedAt: string;
 }
+
+export interface IProduct {
+  __v: number;
+  _id: string;
+  category: string;
+  createdAt: string;
+  description: string;
+  name: string;
+  price: number;
+  rating: number;
+  supply: number;
+  updatedAt: string;
+}
+export interface IStats {
+  __v: number;
+  _id: string;
+  dailyData: { _id: string; date: string; totalUnits: number }[];
+  monthlyData: { _id: string; month: string; totalUnits: number }[];
+  createdAt: string;
+  productId: string;
+  updatedAt: string;
+  yearlySalesTotal: number;
+  yearlyTotalSoldUnits: number;
+}
+export interface IProducts {
+  stat?: IStats[];
+  product: IProduct;
+  key?: number | string;
+}
