@@ -15,16 +15,17 @@ import {
 } from "@mui/material";
 import React, { useContext } from "react";
 import { Outlet, useOutlet, useOutletContext } from "react-router-dom";
-import Product from "../../../server/src/models/product.model";
-import Hero from "../components/shared/Hero";
+import Product from "../../../../server/src/models/product.model";
+import Hero from "../../components/shared/Hero";
 import {
   FlexColumnWrapper,
   FlexRowWrapper,
   LoadingWrapper,
-} from "../components/wrapper/Wrapper";
-import { useGetProductsQuery } from "../state/api";
-import { IProducts } from "../types";
-import ProductsView from "../views/ProductsView";
+} from "../../components/wrapper/Wrapper";
+import { useGetProductsQuery } from "../../state/api";
+import { IProducts } from "../../types";
+import ProductsView from "../../views/ProductsView";
+import StatsView from "../../views/StatsView";
 
 const ProductsPage = () => {
   // CALL THE API

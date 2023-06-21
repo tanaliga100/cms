@@ -6,13 +6,12 @@ import { NavLink, Outlet } from "react-router-dom";
 import Hero from "../components/shared/Hero";
 import { FlexRowWrapper } from "../components/wrapper/Wrapper";
 import DashboardPage from "../pages/DashboardPage";
-import ProductsPage from "../pages/ProductsPage";
+import ProductsPage from "../pages/products/ProductsPage";
 import { useGetProductsQuery } from "../state/api";
 
 const ProductsLayout = () => {
   // CALL THE API
   const data = useGetProductsQuery(undefined);
-
   const dummy = {
     title: "OverView",
   };
@@ -35,9 +34,18 @@ const ProductsLayout = () => {
         <NavLink
           className={({ isActive }) => (isActive ? "linkActive" : "link")}
           to="stats"
+          relative="route"
         >
           {" "}
           Stats
+        </NavLink>
+        <NavLink
+          className={({ isActive }) => (isActive ? "linkActive" : "link")}
+          to="stats"
+          relative="route"
+        >
+          {" "}
+          Details
         </NavLink>
       </Box>
       <Divider sx={{ padding: ".5rem" }} light />

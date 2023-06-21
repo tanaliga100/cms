@@ -11,7 +11,9 @@ import RootLayout from "./layout/RootLayout";
 import TransactionsLayout from "./layout/TransactionsLayout";
 import { RootState } from "./main";
 import DashboardPage from "./pages/DashboardPage";
-import ProductsPage from "./pages/ProductsPage";
+import ProductDetailsPage from "./pages/products/ProductDetailsPage";
+import ProductsPage from "./pages/products/ProductsPage";
+import StatsPage from "./pages/products/StatsPage";
 import { themeSettings } from "./theme";
 import ProductsView from "./views/ProductsView";
 import StatsView from "./views/StatsView";
@@ -31,7 +33,8 @@ function App() {
             {/* // SIMULATION */}
             <Route path="/products" element={<ProductsLayout />}>
               <Route index element={<ProductsPage />} />
-              <Route path="stats" element={<h1>Stats View</h1>} />
+              <Route path="stats" element={<StatsPage />} />
+              <Route path=":id" element={<ProductDetailsPage />} />
             </Route>
             <Route path="/customers" element={<CustomersLayout />}>
               <Route index element={<h1>OverView </h1>} />
