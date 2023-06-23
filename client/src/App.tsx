@@ -8,12 +8,14 @@ import CustomersLayout from "./layout/CustomersLayout";
 import GeoLayout from "./layout/GeoLayout";
 import ProductsLayout from "./layout/ProductsLayout";
 import RootLayout from "./layout/RootLayout";
+import SalesLayout from "./layout/SalesLayout";
 import TransactionsLayout from "./layout/TransactionsLayout";
 import { RootState } from "./main";
 import DashboardPage from "./pages/DashboardPage";
 import ProductDetailsPage from "./pages/products/ProductDetailsPage";
 import ProductsPage from "./pages/products/ProductsPage";
 import StatsPage from "./pages/products/StatsPage";
+import SalesPage from "./pages/sales/SalesPage";
 import { themeSettings } from "./theme";
 import ProductsView from "./views/ProductsView";
 import StatsView from "./views/StatsView";
@@ -44,6 +46,10 @@ function App() {
             </Route>
             <Route path="/geography" element={<GeoLayout />}>
               <Route index element={<h1>Overview</h1>} />
+            </Route>
+
+            <Route path="/overview" element={<SalesLayout />}>
+              <Route index element={<SalesPage />} />
             </Route>
           </Route>
         </Routes>
