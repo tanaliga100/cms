@@ -1,4 +1,5 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
+import { Badge, Box, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { LoadingWrapper } from "../wrapper/Wrapper";
 
@@ -6,6 +7,7 @@ interface IProps {
   title: string;
   subtitle: string;
   isLoading?: boolean;
+  counts?: number;
 }
 
 const Hero: React.FC<IProps> = (props) => {
@@ -25,6 +27,13 @@ const Hero: React.FC<IProps> = (props) => {
             }}
           >
             {props.title}
+            <Badge badgeContent={props.counts} color="secondary">
+              <Inventory2RoundedIcon
+                color="action"
+                fontSize="small"
+                sx={{ fontSize: "1.3rem", mx: ".6rem" }}
+              />
+            </Badge>
           </Typography>
           <Typography
             variant="h5"

@@ -66,20 +66,6 @@ const Navbar: React.FC<Props> = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <FlexRowWrapper
-            sx={
-              {
-                // backgroundColor: theme.palette.background.default || "grey",
-              }
-            }
-            gap="3rem"
-            borderRadius="109x"
-            borderBottom="1px dotted white"
-            p=".1rem 1.5rem"
-          >
-            <InputBase placeholder="Search..." />
-            <Search />
-          </FlexRowWrapper>
         </FlexRowWrapper>
 
         {/* RIGHT-SIDE */}

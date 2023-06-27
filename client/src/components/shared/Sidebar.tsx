@@ -42,6 +42,7 @@ const Sidebar: React.FC<Props> = (props) => {
   // console.log(props);
 
   const { pathname } = useLocation();
+
   const [active, setActive] = useState<string>("");
 
   const navigate = useNavigate();
@@ -225,7 +226,7 @@ const navItems: NavItem[] = [
   { text: "Client Facing", icon: null },
   { text: "Products", icon: <ShoppingCartOutlined /> },
   { text: "Customers", icon: <HomeOutlined /> },
-  { text: "Transactions", icon: <HomeOutlined /> },
+  { text: "Transactions", icon: <PointOfSaleOutlined /> },
   { text: "Geography", icon: <PublicOutlined /> },
   { text: "Sales", icon: null },
   { text: "Overview", icon: <TodayOutlined /> },

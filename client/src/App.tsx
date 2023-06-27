@@ -35,7 +35,7 @@ function App() {
             {/* // SIMULATION */}
             <Route path="/products" element={<ProductsLayout />}>
               <Route index element={<ProductsPage />} />
-              <Route path="stats" element={<StatsPage />} />
+              {/* <Route path="stats" element={<StatsPage />} /> */}
               <Route path=":id" element={<ProductDetailsPage />} />
             </Route>
             <Route path="/customers" element={<CustomersLayout />}>

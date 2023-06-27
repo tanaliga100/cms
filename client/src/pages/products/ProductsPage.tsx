@@ -29,31 +29,21 @@ import StatsView from "../../views/StatsView";
 
 const ProductsPage = () => {
   // CALL THE API
-  const { currentData, data, isLoading, isSuccess, isError, error } =
+  const { data, isLoading, isSuccess, isError, error } =
     useGetProductsQuery(undefined);
 
-  const isNonMobile = useMediaQuery("(width > 600px)");
-
-  // CHECK THE STATUS
-  // MAP THE VALUES
+  const isNonMobile = useMediaQuery("(width > 1000px)");
 
   return (
     <Box>
-      {/* <Hero
-        title="PRODUCTS"
-        subtitle="List of all the Products"
-        isLoading={isLoading}
-      /> */}
-      {/* // HANDLE LOADING... */}
       {data || !isLoading ? (
-        // DISPLAY PRODUCTS HERE...
-
         <Box
           mt="20px"
-          display="flex"
-          flexDirection="column"
-          // gridTemplateColumns="repeat(3, minmax(0, 1fr))"
+          display="grid"
+          // flexDirection="column"
+          gridTemplateColumns="repeat(5, minmax(0, 1fr))"
           justifyContent="space-between"
+          textAlign="center"
           rowGap="20px"
           columnGap="1.33%"
           padding="0 1.5rem"
@@ -63,22 +53,22 @@ const ProductsPage = () => {
             },
           }}
         >
-          {data.withStats.map((product: IProducts, index: number) => {
-            // console.log(product);
-            // return null;
-            return (
-              <ProductsView
-                key={index}
-                product={product.product}
-                stat={product.stat}
-              />
-            );
-          })}
+          {data &&
+            data.withStats.map((product: IProducts, index: number) => {
+              // console.log('stats', product);
+              // return null;
+              return (
+                <ProductsView
+                  key={index}
+                  product={product.product}
+                  stat={product.stat}
+                />
+              );
+            })}
         </Box>
       ) : (
-        <LoadingWrapper isLoading={isLoading} />
+        <LoadingWrapper isLoading={isLoading} text="loading" />
       )}
-      <Outlet />
     </Box>
   );
 };

@@ -15,9 +15,16 @@ export const FlexColumnWrapper = styled(Box)({
   alignItems: "space-between",
   gap: "1rem",
 });
-
+export const GridWrapper = styled(Box)({
+  display: "flex",
+  gridTemplateColumns: "repeat(4, 1fr)",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "1rem",
+});
 interface IProps {
   isLoading: boolean;
+  text?: string | number;
 }
 export const LoadingWrapper: React.FC<IProps> = (props) => {
   return (

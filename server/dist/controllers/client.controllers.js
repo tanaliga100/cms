@@ -39,9 +39,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GET_PRODUCTS = void 0;
+exports.GET_CUSTOMERS = exports.GET_PRODUCTS = void 0;
 var product_model_1 = __importDefault(require("../models/product.model"));
 var productStats_model_1 = __importDefault(require("../models/productStats.model"));
+var user_model_1 = __importDefault(require("../models/user.model"));
 var GET_PRODUCTS = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var products, productWithStats, error_1;
     return __generator(this, function (_a) {
@@ -90,3 +91,25 @@ var GET_PRODUCTS = function (req, res, next) { return __awaiter(void 0, void 0, 
     });
 }); };
 exports.GET_PRODUCTS = GET_PRODUCTS;
+var GET_CUSTOMERS = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var customers, error_2;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, user_model_1.default.find({ role: "user" }).select("-password")];
+            case 1:
+                customers = _a.sent();
+                if (!customers) {
+                    return [2 /*return*/, res.status(404).json({ message: "No customers" })];
+                }
+                res.status(200).json({ counts: customers.length, customers: customers });
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                return [2 /*return*/, res.status(500).json({ message: " Error occured" })];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.GET_CUSTOMERS = GET_CUSTOMERS;
