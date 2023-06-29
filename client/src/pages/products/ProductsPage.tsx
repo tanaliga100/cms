@@ -29,14 +29,14 @@ import StatsView from "../../views/StatsView";
 
 const ProductsPage = () => {
   // CALL THE API
-  const { data, isLoading, isSuccess, isError, error } =
-    useGetProductsQuery(undefined);
-
   const isNonMobile = useMediaQuery("(width > 1000px)");
 
+  //   recieves the ctx
+  const ctx = useOutletContext<any>();
+  console.log("ctx", ctx);
   return (
     <Box>
-      {data || !isLoading ? (
+      {ctx.data || !ctx.isLoading ? (
         <Box
           mt="20px"
           display="grid"
@@ -49,11 +49,11 @@ const ProductsPage = () => {
           padding="0 1.5rem"
           sx={{
             "& > div": {
-              gridColumn: isNonMobile ? undefined : "span 4",
+              gridColumn: isNonMobile ? undefined : "span 5",
             },
           }}
         >
-          {data &&
+          {/* {data &&
             data.withStats.map((product: IProducts, index: number) => {
               // console.log('stats', product);
               // return null;
@@ -64,10 +64,10 @@ const ProductsPage = () => {
                   stat={product.stat}
                 />
               );
-            })}
+            })} */}
         </Box>
       ) : (
-        <LoadingWrapper isLoading={isLoading} text="loading" />
+        <LoadingWrapper isLoading={ctx.isLoading} text="loading" />
       )}
     </Box>
   );

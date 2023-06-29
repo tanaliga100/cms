@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -56,27 +67,27 @@ var GET_PRODUCTS = function (req, res, next) { return __awaiter(void 0, void 0, 
                     res.status(404).json({ message: "Product not found" });
                 }
                 return [4 /*yield*/, Promise.all(products.map(function (product) { return __awaiter(void 0, void 0, void 0, function () {
-                        var stat;
+                        var withStats;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0: return [4 /*yield*/, productStats_model_1.default.find({
-                                        productId: product._id,
-                                    })];
+                                case 0:
+                                    console.log("PROD", product);
+                                    return [4 /*yield*/, productStats_model_1.default.find({
+                                            productId: product._id,
+                                        })];
                                 case 1:
-                                    stat = _a.sent();
-                                    return [2 /*return*/, {
-                                            product: product,
-                                            stat: stat,
-                                        }];
+                                    withStats = _a.sent();
+                                    return [2 /*return*/, __assign(__assign({}, product), { withStats: withStats })];
                             }
                         });
                     }); }))];
             case 2:
                 productWithStats = _a.sent();
                 res.status(200).json({
+                    message: "All Products",
                     counts: products.length,
-                    products: products,
-                    withStats: productWithStats,
+                    // products: products,
+                    // productWithStats: productWithStats,
                 });
                 return [3 /*break*/, 4];
             case 3:

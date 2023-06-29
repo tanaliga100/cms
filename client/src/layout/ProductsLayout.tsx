@@ -51,7 +51,7 @@ const ProductsLayout = () => {
         </NavLink>
       </Box> */}
       <Divider light />
-      <Outlet />
+      <Outlet context={data} />
     </Box>
   );
 };

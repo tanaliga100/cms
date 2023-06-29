@@ -45,7 +45,7 @@ const ProductsView: React.FC<IProducts> = (props) => {
         background: "none",
         borderRadius: ".5rem",
         padding: "1rem",
-        maxWidth: 300,
+        maxWidth: "auto",
       }}
     >
       <CardContent>
@@ -60,7 +60,6 @@ const ProductsView: React.FC<IProducts> = (props) => {
     </Card>
   );
 };
-
 export default ProductsView;
 //  <FlexColumnWrapper gap="2rem">
 //       <FlexRowWrapper flexGrow={1}>

@@ -17,19 +17,22 @@ export const GET_PRODUCTS = async (
     // GET THE PRODUCT STATS
     const productWithStats = await Promise.all(
       products.map(async (product) => {
-        const stat = await ProductStat.find({
+        console.log("PROD", product);
+
+        const withStats = await ProductStat.find({
           productId: product._id,
         });
         return {
-          product,
-          stat,
+          ...product,
+          withStats,
         };
       })
     );
     res.status(200).json({
+      message: "All Products",
       counts: products.length,
-      products: products,
-      withStats: productWithStats,
+      // products: products,
+      // productWithStats: productWithStats,
     });
   } catch (error: unknown) {
     if (error instanceof Error) {
