@@ -1,27 +1,20 @@
-import { ExpandMore } from "@mui/icons-material";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import {
-  Badge,
-  Box,
   Card,
+  CardActions,
   CardContent,
   Chip,
+  Collapse,
+  Divider,
   IconButton,
-  Paper,
+  Rating,
+  Stack,
   Typography,
   useTheme,
 } from "@mui/material";
-import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import {
-  FlexColumnWrapper,
-  FlexRowWrapper,
-  GridWrapper,
-} from "../components/wrapper/Wrapper";
+import React from "react";
 import { IProduct, IProducts } from "../types";
-import StatsView from "./StatsView";
 
+import LaunchIcon from "@mui/icons-material/Launch";
 const ProductsView: React.FC<IProducts> = (props) => {
   const {
     __v,
@@ -34,33 +27,118 @@ const ProductsView: React.FC<IProducts> = (props) => {
     rating,
     supply,
     updatedAt,
+    stats,
   } = props.product as IProduct;
 
   const theme = useTheme();
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [expanded, setExpanded] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   return (
     <Card
       sx={{
-        background: "none",
+        backgroundColor: theme.palette.background?.default,
         borderRadius: ".5rem",
-        padding: "1rem",
         maxWidth: "auto",
+        overflow: "visible",
+        textAlign: "center",
       }}
     >
       <CardContent>
-        <Typography variant="h4" fontWeight="bolder" color="tan">
+        <Typography
+          variant="h4"
+          fontWeight="bolder"
+          color={theme.palette.secondary.main}
+          gutterBottom
+        >
           {name}
         </Typography>
-        <Typography variant="body1" color="tan">
-          Price: {price}
+        <Typography
+          variant="body1"
+          color={theme.palette.success.main}
+          gutterBottom
+        >
+          Price: $ {price.toFixed(2)}
         </Typography>
+        <Rating value={rating} readOnly />
       </CardContent>
-      <Chip label={category} variant="outlined" />
+      <CardActions
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-around",
+        }}
+      >
+        <IconButton
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+          size="large"
+          onClick={() => handleExpandClick()}
+        >
+          {!expanded ? <LaunchIcon /> : <CloseFullscreenIcon />}
+        </IconButton>
+        <Chip label={category} variant="outlined" />
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <Divider />
+        <Stack spacing={2} padding="1rem">
+          <Typography
+            variant="body2"
+            fontWeight="smaller"
+            color={theme.palette.secondary.main}
+            gutterBottom
+          >
+            Created: {createdAt}
+          </Typography>
+          <Typography
+            paragraph
+            variant="body1"
+            color={theme.palette.secondary.main}
+            gutterBottom
+          >
+            Desc: {description}
+          </Typography>
+          <Typography
+            variant="body1"
+            color={theme.palette.success.main}
+            gutterBottom
+          >
+            Supply: {supply}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            color={theme.palette.success.main}
+            gutterBottom
+          ></Typography>
+        </Stack>
+      </Collapse>
     </Card>
   );
 };
+
 export default ProductsView;
+
+import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
+// const ExpandMore = styled((props: ExpandMoreProps) => {
+//   const { expand, ...other } = props;
+//   return <IconButton {...other} />;
+// })(({ theme, expand }) => ({
+//   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+//   marginLeft: "auto",
+//   transition: theme.transitions.create("transform", {
+//     duration: theme.transitions.duration.shortest,
+//   }),
+// }));
+
+// interface ExpandMoreProps extends IconButtonProps {
+//   expand: boolean;
+// }
+
 //  <FlexColumnWrapper gap="2rem">
 //       <FlexRowWrapper flexGrow={1}>
 //         <Typography variant="h6" fontWeight="bolder">

@@ -67,17 +67,15 @@ var GET_PRODUCTS = function (req, res, next) { return __awaiter(void 0, void 0, 
                     res.status(404).json({ message: "Product not found" });
                 }
                 return [4 /*yield*/, Promise.all(products.map(function (product) { return __awaiter(void 0, void 0, void 0, function () {
-                        var withStats;
+                        var stats;
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0:
-                                    console.log("PROD", product);
-                                    return [4 /*yield*/, productStats_model_1.default.find({
-                                            productId: product._id,
-                                        })];
+                                case 0: return [4 /*yield*/, productStats_model_1.default.find({
+                                        productId: product._id,
+                                    })];
                                 case 1:
-                                    withStats = _a.sent();
-                                    return [2 /*return*/, __assign(__assign({}, product), { withStats: withStats })];
+                                    stats = _a.sent();
+                                    return [2 /*return*/, __assign(__assign({}, product.toObject()), { stats: stats })];
                             }
                         });
                     }); }))];
@@ -87,7 +85,7 @@ var GET_PRODUCTS = function (req, res, next) { return __awaiter(void 0, void 0, 
                     message: "All Products",
                     counts: products.length,
                     // products: products,
-                    // productWithStats: productWithStats,
+                    productWithStats: productWithStats,
                 });
                 return [3 /*break*/, 4];
             case 3:

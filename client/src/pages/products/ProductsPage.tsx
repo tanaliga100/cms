@@ -23,7 +23,7 @@ import {
   LoadingWrapper,
 } from "../../components/wrapper/Wrapper";
 import { useGetProductsQuery } from "../../state/api";
-import { IProducts } from "../../types";
+import { IProduct, IProducts } from "../../types";
 import ProductsView from "../../views/ProductsView";
 import StatsView from "../../views/StatsView";
 
@@ -33,7 +33,7 @@ const ProductsPage = () => {
 
   //   recieves the ctx
   const ctx = useOutletContext<any>();
-  console.log("ctx", ctx);
+  // console.log("ctx", ctx.data);
   return (
     <Box>
       {ctx.data || !ctx.isLoading ? (
@@ -41,30 +41,25 @@ const ProductsPage = () => {
           mt="20px"
           display="grid"
           // flexDirection="column"
-          gridTemplateColumns="repeat(5, minmax(0, 1fr))"
+          gridTemplateColumns="repeat(4, minmax(0, 1fr))"
           justifyContent="space-between"
           textAlign="center"
-          rowGap="20px"
-          columnGap="1.33%"
-          padding="0 1.5rem"
+          rowGap="2rem"
+          columnGap="2rem"
+          padding="1rem 0 0 1.5rem"
           sx={{
             "& > div": {
               gridColumn: isNonMobile ? undefined : "span 5",
             },
           }}
         >
-          {/* {data &&
-            data.withStats.map((product: IProducts, index: number) => {
-              // console.log('stats', product);
-              // return null;
-              return (
-                <ProductsView
-                  key={index}
-                  product={product.product}
-                  stat={product.stat}
-                />
-              );
-            })} */}
+          {ctx.data &&
+            ctx.data.productWithStats.map(
+              (product: IProduct, index: number) => {
+                // console.log("stats", product);
+                return <ProductsView product={product} key={index} />;
+              }
+            )}
         </Box>
       ) : (
         <LoadingWrapper isLoading={ctx.isLoading} text="loading" />

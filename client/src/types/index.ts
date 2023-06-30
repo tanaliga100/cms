@@ -31,6 +31,7 @@ export interface IProduct {
   rating: number;
   supply: number;
   updatedAt: string;
+  stats: IStats[];
 }
 export interface IStats {
   __v: number;
@@ -44,8 +45,9 @@ export interface IStats {
   yearlyTotalSoldUnits: number;
 }
 export interface IProducts {
-  stat?: IStats[];
+  stats?: IStats[];
   ctx?: string;
   product?: IProduct;
   key?: number | string;
 }
+``;
