@@ -1,11 +1,12 @@
 import {
+  Box,
   Card,
   CardActions,
   CardContent,
   Chip,
-  Collapse,
   Divider,
   IconButton,
+  Modal,
   Rating,
   Stack,
   Typography,
@@ -15,6 +16,10 @@ import React from "react";
 import { IProduct, IProducts } from "../types";
 
 import LaunchIcon from "@mui/icons-material/Launch";
+import {
+  FlexColumnWrapper,
+  FlexRowWrapper,
+} from "../components/wrapper/Wrapper";
 const ProductsView: React.FC<IProducts> = (props) => {
   const {
     __v,
@@ -35,6 +40,26 @@ const ProductsView: React.FC<IProducts> = (props) => {
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
+    setOpen(true);
+  };
+
+  // MODAL
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: "absolute" as const,
+    top: "50%",
+    left: "50%",
+    borderRadius: "10px",
+    transform: "translate(-50%, -50%)",
+    width: "50%",
+    // bgcolor: "background.paper",
+    bgcolor: `${theme.palette.background.default}`,
+    boxShadow: 24,
+    p: 4,
+    scrollY: true,
   };
 
   return (
@@ -63,7 +88,6 @@ const ProductsView: React.FC<IProducts> = (props) => {
         >
           Price: $ {price.toFixed(2)}
         </Typography>
-        <Rating value={rating} readOnly />
       </CardContent>
       <CardActions
         sx={{
@@ -80,50 +104,203 @@ const ProductsView: React.FC<IProducts> = (props) => {
           size="large"
           onClick={() => handleExpandClick()}
         >
-          {!expanded ? <LaunchIcon /> : <CloseFullscreenIcon />}
+          {/* {!expanded ? <LaunchIcon /> : <CloseFullscreenIcon />} */}
+          <LaunchIcon />
         </IconButton>
-        <Chip label={category} variant="outlined" />
+        <Rating value={rating} readOnly />
       </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
+      {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
         <Divider />
         <Stack spacing={2} padding="1rem">
-          <Typography
-            variant="body2"
-            fontWeight="smaller"
-            color={theme.palette.secondary.main}
-            gutterBottom
-          >
-            Created: {createdAt}
-          </Typography>
-          <Typography
-            paragraph
-            variant="body1"
-            color={theme.palette.secondary.main}
-            gutterBottom
-          >
-            Desc: {description}
-          </Typography>
-          <Typography
-            variant="body1"
-            color={theme.palette.success.main}
-            gutterBottom
-          >
-            Supply: {supply}
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            color={theme.palette.success.main}
-            gutterBottom
-          ></Typography>
+          <Chip
+            label={category}
+            variant="outlined"
+            sx={{ background: theme.palette.background.default }}
+          />
+
+          <FlexColumnWrapper>
+            <Typography variant="h5" fontWeight={700}>
+              Created:
+            </Typography>
+            <Typography
+              variant="body1"
+              fontWeight="smaller"
+              color={theme.palette.secondary.main}
+              gutterBottom
+            >
+              {createdAt}
+            </Typography>
+          </FlexColumnWrapper>
+          <FlexColumnWrapper>
+            <Typography variant="h5" fontWeight={700}>
+              Description:
+            </Typography>
+            <Typography
+              variant="body2"
+              fontWeight="smaller"
+              color={theme.palette.secondary.main}
+              gutterBottom
+            >
+              {description}
+            </Typography>
+          </FlexColumnWrapper>
+          <FlexColumnWrapper>
+            <Typography variant="h5" fontWeight={700}>
+              Supply:
+            </Typography>
+            <Typography
+              variant="body2"
+              fontWeight="smaller"
+              color={theme.palette.secondary.main}
+              gutterBottom
+            >
+              {supply}
+            </Typography>
+          </FlexColumnWrapper>
         </Stack>
-      </Collapse>
+      </Collapse> */}
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="modal-modal-title"
+            variant="h4"
+            fontWeight={800}
+            component="h2"
+          >
+            {name} Details
+          </Typography>
+          <FlexRowWrapper>
+            <Rating value={rating} readOnly />
+            <Typography variant="body2"> ID : {_id}</Typography>
+          </FlexRowWrapper>
+          <Divider />
+          <FlexColumnWrapper>
+            <Typography variant="h6" fontWeight={800}>
+              createdAt:
+            </Typography>
+            <Typography
+              variant="caption"
+              fontWeight="smaller"
+              color={theme.palette.primary.contrastText}
+            >
+              {createdAt}
+            </Typography>
+          </FlexColumnWrapper>
+
+          <FlexColumnWrapper mt={3}>
+            <Typography variant="h6" fontWeight={800}>
+              Description:
+            </Typography>
+            <Typography
+              variant="caption"
+              fontWeight="smaller"
+              color={theme.palette.primary.contrastText}
+              gutterBottom
+            >
+              {description}
+            </Typography>
+          </FlexColumnWrapper>
+
+          {/* <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Necessitatibus exercitationem aut sint inventore error, consectetur,
+            labore sit dolorem magnam autem quibusdam. Eos suscipit dolores vero
+          </Typography> */}
+          <Stack spacing={2}>
+            {stats.map((stat) => {
+              return (
+                <Stack key={stat._id}>
+                  <FlexRowWrapper mt={3}>
+                    <Typography variant="h6" fontWeight={800}>
+                      YearlySalesTotal:
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      fontWeight="smaller"
+                      color={theme.palette.primary.contrastText}
+                      gutterBottom
+                    >
+                      <Stack
+                        sx={{
+                          background: `${theme.palette.background.default}`,
+                          padding: ".7rem",
+                        }}
+                      >
+                        <Chip label={stat.yearlySalesTotal} />
+                      </Stack>
+                    </Typography>
+                    <Typography variant="h6" fontWeight={800}>
+                      YearlyTotalSoldUnits:
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      fontWeight="smaller"
+                      color={theme.palette.primary.contrastText}
+                      gutterBottom
+                    >
+                      <Stack
+                        sx={{
+                          background: `${theme.palette.background.default}`,
+                          padding: ".7rem",
+                        }}
+                      >
+                        <Chip label={stat.yearlyTotalSoldUnits} />
+                      </Stack>
+                    </Typography>
+                  </FlexRowWrapper>
+                  <Divider />
+                  {/* DAILY DATA  */}
+                  <FlexRowWrapper>
+                    <Typography variant="h6" fontWeight={800}>
+                      Total Units Daily Basis:
+                    </Typography>
+                    <Stack
+                      sx={{
+                        background: `${theme.palette.background.default}`,
+                        padding: ".7rem",
+                      }}
+                    >
+                      {stat.dailyData.reduce(
+                        (total, dData) => total + dData.totalUnits,
+                        0
+                      )}
+                    </Stack>
+                  </FlexRowWrapper>
+                  {/* MONTHLY DATA  */}
+                  <FlexRowWrapper>
+                    <Typography variant="h6" fontWeight={800}>
+                      Total Units Monthly Basis:
+                    </Typography>
+                    <Stack
+                      sx={{
+                        background: `${theme.palette.background.default}`,
+                        padding: ".7rem",
+                      }}
+                    >
+                      {stat.monthlyData.reduce(
+                        (total, dData) => total + dData.totalUnits,
+                        0
+                      )}
+                    </Stack>
+                  </FlexRowWrapper>
+                </Stack>
+              );
+            })}
+          </Stack>
+        </Box>
+      </Modal>
     </Card>
   );
 };
 
 export default ProductsView;
 
-import CloseFullscreenIcon from "@mui/icons-material/CloseFullscreen";
 // const ExpandMore = styled((props: ExpandMoreProps) => {
 //   const { expand, ...other } = props;
 //   return <IconButton {...other} />;

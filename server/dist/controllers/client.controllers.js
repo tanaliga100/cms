@@ -112,7 +112,9 @@ var GET_CUSTOMERS = function (req, res, next) { return __awaiter(void 0, void 0,
                 if (!customers) {
                     return [2 /*return*/, res.status(404).json({ message: "No customers" })];
                 }
-                res.status(200).json({ counts: customers.length, customers: customers });
+                res
+                    .status(200)
+                    .json({ message: "All Users", counts: customers.length, customers: customers });
                 return [3 /*break*/, 3];
             case 2:
                 error_2 = _a.sent();

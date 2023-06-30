@@ -14,11 +14,8 @@ import { RootState } from "./main";
 import DashboardPage from "./pages/DashboardPage";
 import ProductDetailsPage from "./pages/products/ProductDetailsPage";
 import ProductsPage from "./pages/products/ProductsPage";
-import StatsPage from "./pages/products/StatsPage";
 import SalesPage from "./pages/sales/SalesPage";
 import { themeSettings } from "./theme";
-import ProductsView from "./views/ProductsView";
-import StatsView from "./views/StatsView";
 function App() {
   const mode = useSelector((state: RootState) => state.global.mode);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);

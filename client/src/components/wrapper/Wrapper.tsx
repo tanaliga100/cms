@@ -1,6 +1,5 @@
 import { Backdrop, Box, CircularProgress, styled } from "@mui/material";
 import React from "react";
-
 export const FlexRowWrapper = styled(Box)({
   display: "flex",
   flexDirection: "row",
@@ -22,6 +21,7 @@ export const GridWrapper = styled(Box)({
   alignItems: "center",
   gap: "1rem",
 });
+
 interface IProps {
   isLoading: boolean;
   text?: string | number;

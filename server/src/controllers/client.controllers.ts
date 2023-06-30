@@ -51,7 +51,9 @@ export const GET_CUSTOMERS = async (
     if (!customers) {
       return res.status(404).json({ message: "No customers" });
     }
-    res.status(200).json({ counts: customers.length, customers });
+    res
+      .status(200)
+      .json({ message: "All Users", counts: customers.length, customers });
   } catch (error) {
     return res.status(500).json({ message: " Error occured" });
   }

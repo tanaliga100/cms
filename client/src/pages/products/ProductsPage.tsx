@@ -1,31 +1,13 @@
-import { ExpandMore } from "@mui/icons-material";
 import {
-  Avatar,
-  Backdrop,
   Box,
-  Card,
-  CardActions,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  CircularProgress,
-  IconButton,
-  Typography,
-  useMediaQuery,
+  useMediaQuery
 } from "@mui/material";
-import React, { useContext } from "react";
-import { Outlet, useOutlet, useOutletContext } from "react-router-dom";
-import Product from "../../../../server/src/models/product.model";
-import Hero from "../../components/shared/Hero";
+import { useOutletContext } from "react-router-dom";
 import {
-  FlexColumnWrapper,
-  FlexRowWrapper,
-  LoadingWrapper,
+  LoadingWrapper
 } from "../../components/wrapper/Wrapper";
-import { useGetProductsQuery } from "../../state/api";
-import { IProduct, IProducts } from "../../types";
+import { IProduct } from "../../types";
 import ProductsView from "../../views/ProductsView";
-import StatsView from "../../views/StatsView";
 
 const ProductsPage = () => {
   // CALL THE API

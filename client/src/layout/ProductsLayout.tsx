@@ -1,16 +1,10 @@
-import { Dashboard } from "@mui/icons-material";
-import { Box, Divider, Paper, Typography, useTheme } from "@mui/material";
-import { orange } from "@mui/material/colors";
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Box, Divider } from "@mui/material";
+import { Outlet } from "react-router-dom";
 import Hero from "../components/shared/Hero";
 import Search from "../components/shared/Search";
 import {
-  FlexColumnWrapper,
-  FlexRowWrapper,
+  FlexRowWrapper
 } from "../components/wrapper/Wrapper";
-import DashboardPage from "../pages/DashboardPage";
-import ProductsPage from "../pages/products/ProductsPage";
 import { useGetProductsQuery } from "../state/api";
 
 const ProductsLayout = () => {
