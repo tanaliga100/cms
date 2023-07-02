@@ -6,7 +6,6 @@ import { LoadingWrapper } from "../../components/wrapper/Wrapper";
 const CustomersPage = () => {
   // retrieve the context
   const ctx = useOutletContext<any>();
-  console.log("CTX", ctx?.data?.customers);
   const theme = useTheme();
 
   // const columns = [
@@ -84,7 +83,7 @@ const CustomersPage = () => {
         maxWidth: "100vw",
         mt: "20px",
         padding: "0 1rem",
-        background: theme.palette.mode.main,
+        // background: theme.palette.background.default,
       }}
     >
       {ctx?.data?.customers ? (
@@ -104,7 +103,7 @@ const CustomersPage = () => {
           checkboxSelection
           sx={{
             border: "none",
-            color: theme.palette.secondary.main,
+            color: theme.palette.primary.contrastText,
           }}
         />
       ) : (
