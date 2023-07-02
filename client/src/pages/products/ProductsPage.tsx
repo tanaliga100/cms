@@ -1,11 +1,6 @@
-import {
-  Box,
-  useMediaQuery
-} from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
-import {
-  LoadingWrapper
-} from "../../components/wrapper/Wrapper";
+import { LoadingWrapper } from "../../components/wrapper/Wrapper";
 import { IProduct } from "../../types";
 import ProductsView from "../../views/ProductsView";
 

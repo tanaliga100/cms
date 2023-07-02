@@ -3,7 +3,6 @@ import {
   DarkModeOutlined,
   LightModeOutlined,
   Menu as MenuIcon,
-  Search,
   SettingsOutlined,
 } from "@mui/icons-material";
 import {
@@ -11,7 +10,6 @@ import {
   Box,
   Button,
   IconButton,
-  InputBase,
   Menu,
   MenuItem,
   Toolbar,
@@ -67,7 +65,6 @@ const Navbar: React.FC<Props> = (props) => {
             <MenuIcon />
           </IconButton>
         </FlexRowWrapper>
-
         {/* RIGHT-SIDE */}
         <FlexRowWrapper gap="1.5rem">
           <IconButton onClick={() => dispatch(setMode())}>

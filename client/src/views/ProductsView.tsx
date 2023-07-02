@@ -8,6 +8,7 @@ import {
   IconButton,
   Modal,
   Rating,
+  Skeleton,
   Stack,
   Typography,
   useTheme,
@@ -213,85 +214,89 @@ const ProductsView: React.FC<IProducts> = (props) => {
             labore sit dolorem magnam autem quibusdam. Eos suscipit dolores vero
           </Typography> */}
           <Stack spacing={2}>
-            {stats.map((stat) => {
-              return (
-                <Stack key={stat._id}>
-                  <FlexRowWrapper mt={3}>
-                    <Typography variant="h6" fontWeight={800}>
-                      YearlySalesTotal:
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      fontWeight="smaller"
-                      color={theme.palette.primary.contrastText}
-                      gutterBottom
-                    >
+            {stats ? (
+              stats.map((stat) => {
+                return (
+                  <Stack key={stat._id}>
+                    <FlexRowWrapper mt={3}>
+                      <Typography variant="h6" fontWeight={800}>
+                        YearlySalesTotal:
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        fontWeight="smaller"
+                        color={theme.palette.primary.contrastText}
+                        gutterBottom
+                      >
+                        <Stack
+                          sx={{
+                            background: `${theme.palette.background.default}`,
+                            padding: ".7rem",
+                          }}
+                        >
+                          <Chip label={stat.yearlySalesTotal} />
+                        </Stack>
+                      </Typography>
+                      <Typography variant="h6" fontWeight={800}>
+                        YearlyTotalSoldUnits:
+                      </Typography>
+                      <Typography
+                        variant="caption"
+                        fontWeight="smaller"
+                        color={theme.palette.primary.contrastText}
+                        gutterBottom
+                      >
+                        <Stack
+                          sx={{
+                            background: `${theme.palette.background.default}`,
+                            padding: ".7rem",
+                          }}
+                        >
+                          <Chip label={stat.yearlyTotalSoldUnits} />
+                        </Stack>
+                      </Typography>
+                    </FlexRowWrapper>
+                    <Divider />
+                    {/* DAILY DATA  */}
+                    <FlexRowWrapper>
+                      <Typography variant="h6" fontWeight={800}>
+                        Total Units Daily Basis:
+                      </Typography>
                       <Stack
                         sx={{
                           background: `${theme.palette.background.default}`,
                           padding: ".7rem",
                         }}
                       >
-                        <Chip label={stat.yearlySalesTotal} />
+                        {stat.dailyData.reduce(
+                          (total, dData) => total + dData.totalUnits,
+                          0
+                        )}
                       </Stack>
-                    </Typography>
-                    <Typography variant="h6" fontWeight={800}>
-                      YearlyTotalSoldUnits:
-                    </Typography>
-                    <Typography
-                      variant="caption"
-                      fontWeight="smaller"
-                      color={theme.palette.primary.contrastText}
-                      gutterBottom
-                    >
+                    </FlexRowWrapper>
+                    {/* MONTHLY DATA  */}
+                    <FlexRowWrapper>
+                      <Typography variant="h6" fontWeight={800}>
+                        Total Units Monthly Basis:
+                      </Typography>
                       <Stack
                         sx={{
                           background: `${theme.palette.background.default}`,
                           padding: ".7rem",
                         }}
                       >
-                        <Chip label={stat.yearlyTotalSoldUnits} />
+                        {stat.monthlyData.reduce(
+                          (total, dData) => total + dData.totalUnits,
+                          0
+                        )}
                       </Stack>
-                    </Typography>
-                  </FlexRowWrapper>
-                  <Divider />
-                  {/* DAILY DATA  */}
-                  <FlexRowWrapper>
-                    <Typography variant="h6" fontWeight={800}>
-                      Total Units Daily Basis:
-                    </Typography>
-                    <Stack
-                      sx={{
-                        background: `${theme.palette.background.default}`,
-                        padding: ".7rem",
-                      }}
-                    >
-                      {stat.dailyData.reduce(
-                        (total, dData) => total + dData.totalUnits,
-                        0
-                      )}
-                    </Stack>
-                  </FlexRowWrapper>
-                  {/* MONTHLY DATA  */}
-                  <FlexRowWrapper>
-                    <Typography variant="h6" fontWeight={800}>
-                      Total Units Monthly Basis:
-                    </Typography>
-                    <Stack
-                      sx={{
-                        background: `${theme.palette.background.default}`,
-                        padding: ".7rem",
-                      }}
-                    >
-                      {stat.monthlyData.reduce(
-                        (total, dData) => total + dData.totalUnits,
-                        0
-                      )}
-                    </Stack>
-                  </FlexRowWrapper>
-                </Stack>
-              );
-            })}
+                    </FlexRowWrapper>
+                  </Stack>
+                );
+              })
+            ) : (
+              <Skeleton variant="rectangular" width={210} height={60} />
+            )}
           </Stack>
         </Box>
       </Modal>

@@ -11,7 +11,8 @@ import RootLayout from "./layout/RootLayout";
 import SalesLayout from "./layout/SalesLayout";
 import TransactionsLayout from "./layout/TransactionsLayout";
 import { RootState } from "./main";
-import DashboardPage from "./pages/DashboardPage";
+import CustomersPage from "./pages/customers/CustomersPage";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 import ProductDetailsPage from "./pages/products/ProductDetailsPage";
 import ProductsPage from "./pages/products/ProductsPage";
 import SalesPage from "./pages/sales/SalesPage";
@@ -36,7 +37,7 @@ function App() {
               <Route path=":id" element={<ProductDetailsPage />} />
             </Route>
             <Route path="/customers" element={<CustomersLayout />}>
-              <Route index element={<h1>OverView </h1>} />
+              <Route index element={<CustomersPage />} />
             </Route>
             <Route path="/transactions" element={<TransactionsLayout />}>
               <Route index element={<h1>Overview</h1>} />

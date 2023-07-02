@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
-import Hero from "../components/shared/Hero";
-import DashboardView from "../views/DashboardView";
+import Hero from "../../components/shared/Hero";
+import DashboardView from "../../views/DashboardView";
 
 const DashboardPage = () => {
   return (
