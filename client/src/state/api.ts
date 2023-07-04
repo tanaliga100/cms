@@ -33,16 +33,6 @@ export const userApi = createApi({
       }),
       providesTags: ["Customers"],
     }),
-    // getTransactions: builder.query<APIResponse, IQueryParams>({
-    //   query: ({ page, pageSize, sort, search }) => {
-    //     const queryParams = new URLSearchParams(sort, search);
-    //     return {
-    //       url: `/client/transactions?${queryParams.sort}&${queryParams.search}&`,
-    //       method: "GET",
-    //     };
-    //   },
-    //   providesTags: ["Customers"],
-    // }),
   }),
 });
 

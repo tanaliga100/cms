@@ -1,11 +1,14 @@
-import { Box } from "@mui/material";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { Box, useTheme } from "@mui/material";
+import { DataGrid, GridColDef, GridToolbarContainer } from "@mui/x-data-grid";
 import { useOutletContext } from "react-router-dom";
+import { FlexRowWrapper } from "../../components/wrapper/Wrapper";
 
 const TransactionsPage = () => {
   // GET THE CONTEXT and log
-  const ctx = useOutletContext();
-  console.log("TRANS", ctx);
+  const { data, msg, counts } = useOutletContext<any>();
+  console.log("TRANS", data);
+
+  const theme = useTheme();
 
   const columns: GridColDef[] = [
     { field: "_id", headerName: "ID", flex: 0.4 },
@@ -13,11 +16,19 @@ const TransactionsPage = () => {
       field: "cost",
       headerName: "Cost",
       flex: 0.2,
+      renderCell: (params) => `$ ${Number(params.value).toFixed(2)}`,
     },
     {
       field: "products",
-      headerName: "Products",
+      headerName: "# of Products",
       type: "string",
+      flex: 0.2,
+      sortable: false,
+      renderCell: (params) => params.value.length,
+    },
+    {
+      field: "createdAt",
+      headerName: "Date Created",
       flex: 0.5,
     },
     {
@@ -26,17 +37,6 @@ const TransactionsPage = () => {
       type: "string",
       flex: 0.5,
     },
-
-    // {
-    //   field: "phoneNumber",
-    //   headerName: "Phone Number",
-    //   type: "number",
-    //   renderCell: (params) => {
-    //     const value = params.value.toString();
-    //     return value.replace(/^(\d{3})(\d{3})(\d{4})/, "($1)$2-$3");
-    //   },
-    //   flex: 0.3,
-    // },
   ];
 
   return (
@@ -50,11 +50,30 @@ const TransactionsPage = () => {
     >
       <DataGrid
         columns={columns}
-        rows={ctx ? (ctx as any)?.transactions : []}
+        rows={data ? (data as any)?.transactions : []}
         getRowId={(row) => row._id}
+        rowCount={data && data.counts}
+        paginationMode="server"
+        sortingMode="server"
+        slots={{
+          toolbar: CustomToolbar,
+        }}
+        sx={{
+          border: "none",
+          color: theme.palette.primary.contrastText,
+          backgroundColor: theme.palette.background.default,
+        }}
       />
     </Box>
   );
 };
 
 export default TransactionsPage;
+
+export const CustomToolbar = () => {
+  return (
+    <GridToolbarContainer>
+      <FlexRowWrapper></FlexRowWrapper>
+    </GridToolbarContainer>
+  );
+};

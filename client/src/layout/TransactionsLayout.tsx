@@ -1,4 +1,4 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider } from "@mui/material";
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Hero from "../components/shared/Hero";
@@ -43,12 +43,9 @@ const TransactionsLayout = () => {
           value={search}
           getValue={changeHandler}
         />
-        <Typography color="tan" variant="h1" p={5} textAlign="end">
-          @tanaliga[73]
-        </Typography>
       </FlexRowWrapper>
       <Divider light />
-      <Outlet context={data && data?.data} />
+      <Outlet context={data} />
     </Box>
   );
 };
