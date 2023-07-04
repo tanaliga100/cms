@@ -6,6 +6,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose_1 = __importDefault(require("mongoose"));
 var TransactionSchema = new mongoose_1.default.Schema({
     userId: String,
+    user: {
+        type: mongoose_1.default.Types.ObjectId,
+        ref: "User",
+    },
     // userId: {
     //   type: mongoose.Types.ObjectId,
     //   ref: "User",

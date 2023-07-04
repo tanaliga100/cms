@@ -1,5 +1,12 @@
 import { Box, useTheme } from "@mui/material";
-import { DataGrid, GridColDef, GridToolbarContainer } from "@mui/x-data-grid";
+import {
+  DataGrid,
+  GridColDef,
+  GridToolbarColumnsButton,
+  GridToolbarContainer,
+  GridToolbarDensitySelector,
+  GridToolbarExport,
+} from "@mui/x-data-grid";
 import { useOutletContext } from "react-router-dom";
 import { FlexRowWrapper } from "../../components/wrapper/Wrapper";
 
@@ -7,9 +14,7 @@ const TransactionsPage = () => {
   // GET THE CONTEXT and log
   const { data, msg, counts } = useOutletContext<any>();
   console.log("TRANS", data);
-
   const theme = useTheme();
-
   const columns: GridColDef[] = [
     { field: "_id", headerName: "ID", flex: 0.4 },
     {
@@ -52,9 +57,9 @@ const TransactionsPage = () => {
         columns={columns}
         rows={data ? (data as any)?.transactions : []}
         getRowId={(row) => row._id}
-        rowCount={data && data.counts}
         paginationMode="server"
         sortingMode="server"
+        rowCount={data && data?.counts}
         slots={{
           toolbar: CustomToolbar,
         }}
@@ -73,7 +78,13 @@ export default TransactionsPage;
 export const CustomToolbar = () => {
   return (
     <GridToolbarContainer>
-      <FlexRowWrapper></FlexRowWrapper>
+      <FlexRowWrapper width="100%">
+        <FlexRowWrapper>
+          <GridToolbarColumnsButton />
+          <GridToolbarDensitySelector />
+          <GridToolbarExport />
+        </FlexRowWrapper>
+      </FlexRowWrapper>
     </GridToolbarContainer>
   );
 };

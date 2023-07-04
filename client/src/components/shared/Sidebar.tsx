@@ -30,6 +30,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { IUser } from "../../types";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
 // import profile from "/src/assets/profile-modified.png";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 interface Props {
   user: IUser;
   isNonMobile: boolean;
@@ -75,6 +76,7 @@ const Sidebar: React.FC<Props> = (props) => {
                 <Box
                   display="flex"
                   alignItems="center"
+                  textAlign="center"
                   gap=".5rem"
                   justifyContent="center"
                 >
@@ -92,14 +94,16 @@ const Sidebar: React.FC<Props> = (props) => {
                       100
                     </span>
                     <span>Vision</span> */}
-                    <img
+                    {/* <img
                       src={
-                        "https://www.clipartmax.com/png/middle/30-309692_storm-logo.png"
+                        "https://pngtree.com/freepng/vector-administration-icon_4090499.html"
                       }
                       height={75}
                       width={200}
                       alt="logo"
-                    />
+                    /> */}
+                    <AdminPanelSettingsIcon />
+                    Storm
                   </Typography>
                 </Box>
                 {!props.isNonMobile && (
