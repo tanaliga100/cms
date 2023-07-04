@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import Product from "../models/product.model";
 import ProductStat from "../models/productStats.model";
+import Transaction from "../models/transaction.model";
 import User from "../models/user.model";
 
 export const GET_PRODUCTS = async (
@@ -56,5 +57,59 @@ export const GET_CUSTOMERS = async (
       .json({ message: "All Users", counts: customers.length, customers });
   } catch (error) {
     return res.status(500).json({ message: " Error occured" });
+  }
+};
+
+export const GET_TRANSACTIONS = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log(req.body, req.query);
+  try {
+    // query strings from FE;
+    // TYPES
+    interface QueryString {
+      page?: number;
+      pageSize?: number;
+      sort?: string | number | null;
+      search?: string;
+    }
+    const {
+      page = 1,
+      pageSize = 20,
+      sort = null,
+      search = "",
+    }: QueryString = req.query;
+
+    const generateSort = () => {
+      const sortParsed = JSON.parse(sort as string);
+      const sortFormatted = {
+        [sortParsed.field]: sortParsed.sort === "asc" ? 1 : -1,
+      };
+      return sortFormatted;
+    };
+    const sortFormatted = Boolean(sort) ? generateSort() : {};
+    const transactionsLength = (await Transaction.find({})).length;
+
+    const transactions = await Transaction.find({
+      $or: [
+        {
+          cost: { $regex: new RegExp(search, "i") },
+          userId: { $regex: new RegExp(search, "i") },
+        },
+      ],
+    })
+      .sort(sortFormatted as {})
+      .skip(page * pageSize)
+      .limit(pageSize);
+
+    res.status(200).json({
+      msg: "ALL TRANSACTIONS",
+      counts: transactionsLength,
+      transactions,
+    });
+  } catch (error) {
+    res.status(500).json({ message: " Error occured" });
   }
 };

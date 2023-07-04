@@ -27,10 +27,9 @@ import {
 } from "@mui/material";
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import logo from "../../assets/Cms100.png";
 import { IUser } from "../../types";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
-import profile from "/src/assets/profile-modified.png";
+// import profile from "/src/assets/profile-modified.png";
 interface Props {
   user: IUser;
   isNonMobile: boolean;
@@ -87,12 +86,20 @@ const Sidebar: React.FC<Props> = (props) => {
                     textAlign="center"
                     justifyContent="space-between"
                   >
-                    <span
+                    {/* <span
                       style={{ color: "crimson", padding: "0 .5rem 0 1px" }}
                     >
                       100
                     </span>
-                    <span>Vision</span>
+                    <span>Vision</span> */}
+                    <img
+                      src={
+                        "https://www.clipartmax.com/png/middle/30-309692_storm-logo.png"
+                      }
+                      height={75}
+                      width={200}
+                      alt="logo"
+                    />
                   </Typography>
                 </Box>
                 {!props.isNonMobile && (
@@ -180,7 +187,10 @@ const Sidebar: React.FC<Props> = (props) => {
               <Box
                 component="img"
                 alt="profile"
-                src={profile}
+                // src={profile}
+                src={
+                  "https://xurpasgroup.com/wp-content/uploads/2021/05/628c3dbfa0c9bd650f9e33f674a3eaf3-1.png"
+                }
                 width="40px"
                 height="40px"
                 borderRadius="50%"

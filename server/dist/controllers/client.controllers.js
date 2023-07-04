@@ -50,9 +50,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GET_CUSTOMERS = exports.GET_PRODUCTS = void 0;
+exports.GET_TRANSACTIONS = exports.GET_CUSTOMERS = exports.GET_PRODUCTS = void 0;
 var product_model_1 = __importDefault(require("../models/product.model"));
 var productStats_model_1 = __importDefault(require("../models/productStats.model"));
+var transaction_model_1 = __importDefault(require("../models/transaction.model"));
 var user_model_1 = __importDefault(require("../models/user.model"));
 var GET_PRODUCTS = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     var products, productWithStats, error_1;
@@ -124,3 +125,53 @@ var GET_CUSTOMERS = function (req, res, next) { return __awaiter(void 0, void 0,
     });
 }); };
 exports.GET_CUSTOMERS = GET_CUSTOMERS;
+var GET_TRANSACTIONS = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var _a, _b, page, _c, pageSize, _d, sort_1, _e, search, generateSort, sortFormatted, transactionsLength, transactions, error_3;
+    return __generator(this, function (_f) {
+        switch (_f.label) {
+            case 0:
+                console.log(req.body, req.query);
+                _f.label = 1;
+            case 1:
+                _f.trys.push([1, 4, , 5]);
+                _a = req.query, _b = _a.page, page = _b === void 0 ? 1 : _b, _c = _a.pageSize, pageSize = _c === void 0 ? 20 : _c, _d = _a.sort, sort_1 = _d === void 0 ? null : _d, _e = _a.search, search = _e === void 0 ? "" : _e;
+                generateSort = function () {
+                    var _a;
+                    var sortParsed = JSON.parse(sort_1);
+                    var sortFormatted = (_a = {},
+                        _a[sortParsed.field] = sortParsed.sort === "asc" ? 1 : -1,
+                        _a);
+                    return sortFormatted;
+                };
+                sortFormatted = Boolean(sort_1) ? generateSort() : {};
+                return [4 /*yield*/, transaction_model_1.default.find({})];
+            case 2:
+                transactionsLength = (_f.sent()).length;
+                return [4 /*yield*/, transaction_model_1.default.find({
+                        $or: [
+                            {
+                                cost: { $regex: new RegExp(search, "i") },
+                                userId: { $regex: new RegExp(search, "i") },
+                            },
+                        ],
+                    })
+                        .sort(sortFormatted)
+                        .skip(page * pageSize)
+                        .limit(pageSize)];
+            case 3:
+                transactions = _f.sent();
+                res.status(200).json({
+                    msg: "ALL TRANSACTIONS",
+                    counts: transactionsLength,
+                    transactions: transactions,
+                });
+                return [3 /*break*/, 5];
+            case 4:
+                error_3 = _f.sent();
+                res.status(500).json({ message: " Error occured" });
+                return [3 /*break*/, 5];
+            case 5: return [2 /*return*/];
+        }
+    });
+}); };
+exports.GET_TRANSACTIONS = GET_TRANSACTIONS;

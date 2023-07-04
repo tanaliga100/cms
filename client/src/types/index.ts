@@ -1,7 +1,7 @@
 export interface APIResponse {
+  counts: number;
+  msg: string;
   data: any[];
-  message: string;
-  status: number;
 }
 export interface IUser {
   v: number;
@@ -51,3 +51,10 @@ export interface IProducts {
   key?: number | string;
 }
 ``;
+
+export interface IQueryParams {
+  page?: number | string;
+  pageSize?: number | string;
+  sort?: string | null;
+  search?: string | null;
+}

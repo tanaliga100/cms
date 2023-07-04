@@ -8,12 +8,6 @@ const CustomersPage = () => {
   const ctx = useOutletContext<any>();
   const theme = useTheme();
 
-  // const columns = [
-  //   { field: "_id", headerName: "ID", flex: 1 },
-  //   { field: "name", headerName: "Name", flex: 1 },
-  //   { field: "email", headerName: "Email", flex: 1 },
-  //   { field: "phone", headerName: "Phone Number", flex: 1 },
-  // ];
   const columns: GridColDef[] = [
     { field: "_id", headerName: "ID", flex: 0.4 },
     {

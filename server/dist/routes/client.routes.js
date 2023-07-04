@@ -8,4 +8,5 @@ var client_controllers_1 = require("../controllers/client.controllers");
 var router = express_1.default.Router();
 router.route("/products").get(client_controllers_1.GET_PRODUCTS);
 router.route("/customers").get(client_controllers_1.GET_CUSTOMERS);
+router.route("/transactions").get(client_controllers_1.GET_TRANSACTIONS);
 exports.default = router;

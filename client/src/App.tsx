@@ -13,9 +13,9 @@ import TransactionsLayout from "./layout/TransactionsLayout";
 import { RootState } from "./main";
 import CustomersPage from "./pages/customers/CustomersPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
-import ProductDetailsPage from "./pages/products/ProductDetailsPage";
 import ProductsPage from "./pages/products/ProductsPage";
 import SalesPage from "./pages/sales/SalesPage";
+import TransactionsPage from "./pages/transactions/TransactionsPage";
 import { themeSettings } from "./theme";
 function App() {
   const mode = useSelector((state: RootState) => state.global.mode);
@@ -29,18 +29,14 @@ function App() {
           <Route element={<RootLayout />}>
             <Route path="/" element={<Navigate to="dashboard" replace />} />
             <Route path="/dashboard" element={<DashboardPage />} />
-            {/* <Route path="/products" element={<ProductsPage />} /> */}
-            {/* // SIMULATION */}
             <Route path="/products" element={<ProductsLayout />}>
               <Route index element={<ProductsPage />} />
-              {/* <Route path="stats" element={<StatsPage />} /> */}
-              <Route path=":id" element={<ProductDetailsPage />} />
             </Route>
             <Route path="/customers" element={<CustomersLayout />}>
               <Route index element={<CustomersPage />} />
             </Route>
             <Route path="/transactions" element={<TransactionsLayout />}>
-              <Route index element={<h1>Overview</h1>} />
+              <Route index element={<TransactionsPage />} />
             </Route>
             <Route path="/geography" element={<GeoLayout />}>
               <Route index element={<h1>Overview</h1>} />

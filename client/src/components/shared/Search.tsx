@@ -5,6 +5,8 @@ import { FlexRowWrapper } from "../wrapper/Wrapper";
 
 interface IProps {
   label?: string;
+  value?: string | number;
+  getValue?: any;
 }
 
 const Search: React.FC<IProps> = (props) => {
@@ -15,7 +17,11 @@ const Search: React.FC<IProps> = (props) => {
       borderBottom="1px dotted white"
       p=".1rem 0rem"
     >
-      <InputBase placeholder={props.label} />
+      <InputBase
+        placeholder={props.label}
+        value={props.value}
+        onChange={props.getValue}
+      />
       <SearchIcon />
     </FlexRowWrapper>
   );

@@ -21,7 +21,7 @@ import { useDispatch } from "react-redux";
 import { setMode } from "../../state";
 import { IUser } from "../../types";
 import { FlexRowWrapper } from "../wrapper/Wrapper";
-import profile from "/src/assets/profile-modified.png";
+// import profile from "/src/assets/profile-modified.png";
 
 interface Props {
   user: IUser;
@@ -94,7 +94,10 @@ const Navbar: React.FC<Props> = (props) => {
               <Box
                 component="img"
                 alt="profile"
-                src={profile}
+                // src={profile}
+                src={
+                  "https://xurpasgroup.com/wp-content/uploads/2021/05/628c3dbfa0c9bd650f9e33f674a3eaf3-1.png"
+                }
                 width="40px"
                 height="40px"
                 borderRadius="50%"
