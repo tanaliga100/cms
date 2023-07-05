@@ -4,17 +4,17 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App.tsx";
 import "./index.css";
-import { userApi } from "./state/api.ts";
+import { adminApi } from "./state/api.ts";
 import themeReducer from "./state/index.ts";
 
 // STORE
 const store = configureStore({
   reducer: {
     global: themeReducer,
-    [userApi.reducerPath]: userApi.reducer,
+    [adminApi.reducerPath]: adminApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(userApi.middleware),
+    getDefaultMiddleware().concat(adminApi.middleware),
 });
 
 setupListeners(store.dispatch);

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { APIResponse, IQueryParams } from "../types";
 
-export const userApi = createApi({
+export const adminApi = createApi({
   reducerPath: "adminApi",
   tagTypes: ["User", "Products", "Customers", "Transactions"],
   baseQuery: fetchBaseQuery({
@@ -41,4 +41,4 @@ export const {
   useGetProductsQuery,
   useGetCustomersQuery,
   useGetTransactionsQuery,
-} = userApi;
+} = adminApi;
