@@ -13,6 +13,7 @@ import TransactionsLayout from "./layout/TransactionsLayout";
 import { RootState } from "./main";
 import CustomersPage from "./pages/customers/CustomersPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import GeoPage from "./pages/geo/GeoPage";
 import ProductsPage from "./pages/products/ProductsPage";
 import SalesPage from "./pages/sales/SalesPage";
 import TransactionsPage from "./pages/transactions/TransactionsPage";
@@ -39,7 +40,7 @@ function App() {
               <Route index element={<TransactionsPage />} />
             </Route>
             <Route path="/geography" element={<GeoLayout />}>
-              <Route index element={<h1>Overview</h1>} />
+              <Route index element={<GeoPage />} />
             </Route>
 
             <Route path="/overview" element={<SalesLayout />}>
