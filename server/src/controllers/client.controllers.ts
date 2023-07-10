@@ -1,3 +1,4 @@
+// import { getCountryIso3 } from "country-iso-2-to-3";
 import { NextFunction, Request, Response } from "express";
 import Product from "../models/product.model";
 import ProductStat from "../models/productStats.model";
@@ -112,4 +113,36 @@ export const GET_TRANSACTIONS = async (
   } catch (error) {
     res.status(500).json({ message: " Error occured" });
   }
+};
+
+export const GET_GEOGRAPHY = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    // grab the user and select the id
+    const users = await User.find({}).select("city state country");
+    // const mappedLocation = users.reduce((acc: any, country: any) => {
+    //   const countryISO = getCountryIso3(country);
+    //   if (!acc[country]) {
+    //     acc[countryISO] = 0;
+    //   }
+    //   acc[countryISO]++;
+    //   return acc;
+    // }, {});
+
+    // final format
+    // const formattedLocation = Object.entries(mappedLocation).map(
+    //   (country, count) => {
+    //     return {
+    //       id: country,
+    //       value: count,
+    //     };
+    //   }
+    // );
+    // console.log("MAPPED", mappedLocation);
+
+    res.status(200).json({ msg: "GEO", users });
+  } catch (error) {}
 };

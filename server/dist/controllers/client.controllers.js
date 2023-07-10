@@ -50,7 +50,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.GET_TRANSACTIONS = exports.GET_CUSTOMERS = exports.GET_PRODUCTS = void 0;
+exports.GET_GEOGRAPHY = exports.GET_TRANSACTIONS = exports.GET_CUSTOMERS = exports.GET_PRODUCTS = void 0;
 var product_model_1 = __importDefault(require("../models/product.model"));
 var productStats_model_1 = __importDefault(require("../models/productStats.model"));
 var transaction_model_1 = __importDefault(require("../models/transaction.model"));
@@ -175,3 +175,40 @@ var GET_TRANSACTIONS = function (req, res, next) { return __awaiter(void 0, void
     });
 }); };
 exports.GET_TRANSACTIONS = GET_TRANSACTIONS;
+var GET_GEOGRAPHY = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var users, error_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, user_model_1.default.find({}).select("city state country")];
+            case 1:
+                users = _a.sent();
+                // const mappedLocation = users.reduce((acc: any, country: any) => {
+                //   const countryISO = getCountryIso3(country);
+                //   if (!acc[country]) {
+                //     acc[countryISO] = 0;
+                //   }
+                //   acc[countryISO]++;
+                //   return acc;
+                // }, {});
+                // final format
+                // const formattedLocation = Object.entries(mappedLocation).map(
+                //   (country, count) => {
+                //     return {
+                //       id: country,
+                //       value: count,
+                //     };
+                //   }
+                // );
+                // console.log("MAPPED", mappedLocation);
+                res.status(200).json({ msg: "GEO", users: users });
+                return [3 /*break*/, 3];
+            case 2:
+                error_4 = _a.sent();
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); };
+exports.GET_GEOGRAPHY = GET_GEOGRAPHY;
