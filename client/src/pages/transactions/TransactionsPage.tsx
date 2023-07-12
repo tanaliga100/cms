@@ -13,7 +13,6 @@ import { FlexRowWrapper } from "../../components/wrapper/Wrapper";
 const TransactionsPage = () => {
   // GET THE CONTEXT and log
   const { data, msg, counts } = useOutletContext<any>();
-  console.log("TRANS", data);
   const theme = useTheme();
   const columns: GridColDef[] = [
     { field: "_id", headerName: "ID", flex: 0.4 },
@@ -59,7 +58,7 @@ const TransactionsPage = () => {
         getRowId={(row) => row._id}
         paginationMode="server"
         sortingMode="server"
-        rowCount={data && data?.counts}
+        rowCount={data ? data?.counts : 0}
         slots={{
           toolbar: CustomToolbar,
         }}
@@ -76,8 +75,9 @@ const TransactionsPage = () => {
 export default TransactionsPage;
 
 export const CustomToolbar = () => {
+  const theme = useTheme();
   return (
-    <GridToolbarContainer>
+    <GridToolbarContainer sx={{ background: theme.palette.secondary.main }}>
       <FlexRowWrapper width="100%">
         <FlexRowWrapper>
           <GridToolbarColumnsButton />

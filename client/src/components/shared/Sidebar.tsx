@@ -49,6 +49,7 @@ const Sidebar: React.FC<Props> = (props) => {
   const theme = useTheme();
   React.useEffect(() => {
     setActive(pathname.substring(1));
+    // console.log("sibar", pathname.substring(1));
   }, [pathname]);
 
   return (

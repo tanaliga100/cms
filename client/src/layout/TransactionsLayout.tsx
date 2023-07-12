@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Hero from "../components/shared/Hero";
 import Search from "../components/shared/Search";
-import { FlexRowWrapper } from "../components/wrapper/Wrapper";
+import { FlexRowWrapper, LoadingWrapper } from "../components/wrapper/Wrapper";
 import { useGetTransactionsQuery } from "../state/api";
 
 const TransactionsLayout = () => {
@@ -45,7 +45,13 @@ const TransactionsLayout = () => {
         />
       </FlexRowWrapper>
       <Divider light />
-      <Outlet context={data} />
+
+      {/* ENTIRETY OF THE PAGE  */}
+      {data.isLoading ? (
+        <LoadingWrapper isLoading={data.isLoading} />
+      ) : (
+        <Outlet context={data} />
+      )}
     </Box>
   );
 };

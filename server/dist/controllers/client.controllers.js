@@ -181,7 +181,7 @@ var GET_GEOGRAPHY = function (req, res, next) { return __awaiter(void 0, void 0,
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, user_model_1.default.find({}).select("city state country")];
+                return [4 /*yield*/, user_model_1.default.find({}).select("city state country role")];
             case 1:
                 users = _a.sent();
                 // const mappedLocation = users.reduce((acc: any, country: any) => {
@@ -202,7 +202,7 @@ var GET_GEOGRAPHY = function (req, res, next) { return __awaiter(void 0, void 0,
                 //   }
                 // );
                 // console.log("MAPPED", mappedLocation);
-                res.status(200).json({ msg: "GEO", users: users });
+                res.status(200).json({ msg: "GEO", counts: users.length, users: users });
                 return [3 /*break*/, 3];
             case 2:
                 error_4 = _a.sent();

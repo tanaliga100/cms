@@ -1,5 +1,5 @@
 import Inventory2RoundedIcon from "@mui/icons-material/Inventory2Rounded";
-import { Badge, Box, Typography, useTheme } from "@mui/material";
+import { Badge, Box, IconButton, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { LoadingWrapper } from "../wrapper/Wrapper";
 
@@ -8,6 +8,7 @@ interface IProps {
   subtitle: string;
   isLoading?: boolean;
   counts?: number;
+  icon?: React.ReactNode;
 }
 
 const Hero: React.FC<IProps> = (props) => {
@@ -27,12 +28,15 @@ const Hero: React.FC<IProps> = (props) => {
             }}
           >
             {props.title}
+
             <Badge badgeContent={props.counts} color="secondary">
-              <Inventory2RoundedIcon
-                color="action"
-                fontSize="small"
-                sx={{ fontSize: "1.3rem", mx: ".6rem" }}
-              />
+              <IconButton sx={{ fontSize: "1.3rem", mx: ".6rem" }}>
+                {props.icon ? (
+                  props.icon
+                ) : (
+                  <Inventory2RoundedIcon color="action" fontSize="small" />
+                )}
+              </IconButton>
             </Badge>
           </Typography>
           <Typography

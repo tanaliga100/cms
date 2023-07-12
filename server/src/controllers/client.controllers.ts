@@ -122,7 +122,7 @@ export const GET_GEOGRAPHY = async (
 ) => {
   try {
     // grab the user and select the id
-    const users = await User.find({}).select("city state country");
+    const users = await User.find({}).select("city state country role");
     // const mappedLocation = users.reduce((acc: any, country: any) => {
     //   const countryISO = getCountryIso3(country);
     //   if (!acc[country]) {
@@ -143,6 +143,6 @@ export const GET_GEOGRAPHY = async (
     // );
     // console.log("MAPPED", mappedLocation);
 
-    res.status(200).json({ msg: "GEO", users });
+    res.status(200).json({ msg: "GEO", counts: users.length, users });
   } catch (error) {}
 };
