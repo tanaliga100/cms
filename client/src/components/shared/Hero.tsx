@@ -7,7 +7,7 @@ interface IProps {
   title: string;
   subtitle: string;
   isLoading?: boolean;
-  counts?: number;
+  counts?: number | React.ReactNode;
   icon?: React.ReactNode;
 }
 

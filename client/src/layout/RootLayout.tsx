@@ -1,6 +1,5 @@
-import { Box, Typography, useMediaQuery } from "@mui/material";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-import React, { useState } from "react";
+import { Box, useMediaQuery } from "@mui/material";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { Outlet } from "react-router-dom";
 import Navbar from "../components/shared/Navbar";

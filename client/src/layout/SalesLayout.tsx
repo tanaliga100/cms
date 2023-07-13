@@ -1,42 +1,43 @@
+import PriceCheckIcon from "@mui/icons-material/PriceCheck";
 import { Box, Divider } from "@mui/material";
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Hero from "../components/shared/Hero";
-
+import { FlexRowWrapper, LoadingWrapper } from "../components/wrapper/Wrapper";
+import { useGetSalesQuery } from "../state/api";
 const SalesLayout = () => {
+  //fetch endpoint
+  const data = useGetSalesQuery<any>(undefined);
+
   return (
     <Box>
-      <Hero title="SALES" subtitle="List of all the Sales" />
-      <Box display="flex" justifyContent="" gap="4rem" padding="0 1.5rem">
-        <NavLink
-          end
-          className={({ isActive }) => (isActive ? "linkActive" : "link")}
-          to="."
-        >
-          Overview
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "linkActive" : "link")}
-          to="stats"
-          relative="route"
-        >
-          {" "}
-          Stats
-        </NavLink>
-        <NavLink
-          className={({ isActive }) => (isActive ? "linkActive" : "link")}
-          to="stats"
-          relative="route"
-        >
-          {" "}
-          Details
-        </NavLink>
-      </Box>
-      <Divider sx={{ padding: ".5rem" }} light />
-      <Box>
-        {/* <Outlet /> */}
-        <Outlet />
-      </Box>
+      <FlexRowWrapper flexGrow={1} sx={{ justifyContent: "left", gap: "3rem" }}>
+        <Hero
+          title="OVERVIEW"
+          subtitle="List of all the Sales "
+          isLoading={data ? data.isLoading : {}}
+          // counts={<PriceCheckIcon />}
+          icon={<PriceCheckIcon />}
+        />
+        <FlexRowWrapper gap={5}>
+          {/* <NavLink className="link" to="." relative="path" end>
+            <Typography variant="h4" fontWeight={800}>
+              Sales
+            </Typography>
+          </NavLink>
+          <NavLink className="link" to=".">
+            <Typography variant="h4" fontWeight={800}>
+              Units
+            </Typography>
+          </NavLink> */}
+        </FlexRowWrapper>
+      </FlexRowWrapper>
+      <Divider light />
+      {/* ENTIRETY OF THE PAGE  */}
+      {data.isLoading ? (
+        <LoadingWrapper isLoading={data.isLoading} />
+      ) : (
+        <Outlet context={data} />
+      )}
     </Box>
   );
 };

@@ -49,7 +49,7 @@ const Navbar: React.FC<Props> = (props) => {
         background: "none",
         boxShadow: "0px 0px -1px 0 grey",
         backgroundColor: "transparent",
-        backdropFilter: "blur(300px)",
+        backdropFilter: "blur(400px)",
       }}
     >
       <Toolbar

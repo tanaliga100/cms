@@ -3,7 +3,14 @@ import { APIResponse, IQueryParams } from "../types";
 
 export const adminApi = createApi({
   reducerPath: "adminApi",
-  tagTypes: ["User", "Products", "Customers", "Transactions", "Geography"],
+  tagTypes: [
+    "User",
+    "Products",
+    "Customers",
+    "Transactions",
+    "Geography",
+    "Overview",
+  ],
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
   }),
@@ -37,6 +44,10 @@ export const adminApi = createApi({
       query: () => `/client/geography`,
       providesTags: ["Geography"],
     }),
+    getSales: builder.query({
+      query: () => `/sales/sales`,
+      providesTags: ["Overview"],
+    }),
   }),
 });
 
@@ -46,4 +57,5 @@ export const {
   useGetCustomersQuery,
   useGetTransactionsQuery,
   useGetGeographyQuery,
+  useGetSalesQuery,
 } = adminApi;

@@ -40,6 +40,7 @@ const start = async () => {
     // Product.insertMany(dataProduct);
     // ProductStat.insertMany(dataProductStat);
     // Transaction.insertMany(dataTransaction);
+    // OverAllStat.insertMany(dataOverallStat);
 
     app.listen(port, () => {
       console.log(`DB ESTABLISHED_ALIVE @: ${port}`);
