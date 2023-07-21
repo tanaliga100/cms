@@ -20,7 +20,7 @@ const GeoLayout = () => {
       {data.isLoading ? (
         <LoadingWrapper isLoading={data.isLoading} />
       ) : (
-        <Box sx={{ height: 500, width: 500 }}>
+        <Box sx={{ width: "100%", height: "70vh" }}>
           <Outlet context={data} />
         </Box>
       )}
