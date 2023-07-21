@@ -1,6 +1,5 @@
-import { Box, Stack } from "@mui/material";
+import { Box } from "@mui/material";
 import { useOutletContext } from "react-router-dom";
-import { FlexRowWrapper } from "../../components/wrapper/Wrapper";
 
 export interface User {
   _id: string;
@@ -12,32 +11,30 @@ export interface User {
 
 const GeoPage = () => {
   const data = useOutletContext<any>();
-  const users: User[] = data.data.users.slice(0, 8);
-  // console.log("USERS", users.slice(0, 10));
+  const users: User[] = data.data.users;
 
-  return (
-    <Box p={2}>
-      {users.map((user: any) => {
-        return (
-          <FlexRowWrapper key={user._id} sx={{ py: ".5rem" }}>
-            <Stack>{user.role}</Stack>
-            <Stack>{user.city}</Stack>
-          </FlexRowWrapper>
-        );
-      })}
-    </Box>
+  // FORMAT THE DATE HERE...
+  const aggregate = users.reduce(
+    (acc: any, current: any) => {
+      //desctruct
+      const { _id, city, coordinates, country, role, state } = current;
+      // Group by role
+      acc.roleCounts[role] = (acc.roleCounts[role] || 0) + 1;
+      // Group by country
+      acc.countryCounts[country] = (acc.countryCounts[country] || 0) + 1;
+      // Users Location
+      acc.userLocation[coordinates] = acc.userLocation[coordinates] + 1;
+      return acc;
+    },
+    {
+      countryCounts: {},
+      roleCounts: {},
+      userLocation: {},
+    }
   );
+  console.log("AGGREGATE", aggregate);
+
+  return <Box p={2} sx={{ height: 400, widht: 400 }}></Box>;
 };
 
 export default GeoPage;
-
-{
-  /* {users.map((user: any) => {
-        return (
-          <FlexRowWrapper key={user._id} sx={{ py: ".5rem" }}>
-            <Typography>{user.role}</Typography>
-            <Typography>{user.city}</Typography>
-          </FlexRowWrapper>
-        );
-      })} */
-}

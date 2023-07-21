@@ -21,7 +21,7 @@ const Hero: React.FC<IProps> = (props) => {
         <Box m="3rem  1.5rem 3rem 1.5rem">
           <Typography
             variant="h3"
-            color={theme.palette.primary.contrastText}
+            color="grey"
             fontWeight="bold"
             sx={{
               mb: "5px",

@@ -1,5 +1,6 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useState } from "react";
+import OverViewChart from "../../views/OverviewChart";
 import { FlexColumnWrapper } from "../wrapper/Wrapper";
 
 interface IProps {
@@ -36,7 +37,9 @@ const SalesOverview = ({ data }: IProps) => {
           </Select>
         </FormControl>
         {/* OverViewChart  */}
-        {/* <OverViewChart data={data} view={view} /> */}
+        <Box sx={{ height: "50vh" }}>
+          <OverViewChart data={data} view={view} />
+        </Box>
       </FlexColumnWrapper>
     </Box>
   );

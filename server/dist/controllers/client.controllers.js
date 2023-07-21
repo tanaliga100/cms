@@ -51,6 +51,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GET_GEOGRAPHY = exports.GET_TRANSACTIONS = exports.GET_CUSTOMERS = exports.GET_PRODUCTS = void 0;
+require("dotenv").config();
+// import { getCountryIso3 } from "country-iso-2-to-3";
+var axios_1 = __importDefault(require("axios"));
 var product_model_1 = __importDefault(require("../models/product.model"));
 var productStats_model_1 = __importDefault(require("../models/productStats.model"));
 var transaction_model_1 = __importDefault(require("../models/transaction.model"));
@@ -175,39 +178,57 @@ var GET_TRANSACTIONS = function (req, res, next) { return __awaiter(void 0, void
     });
 }); };
 exports.GET_TRANSACTIONS = GET_TRANSACTIONS;
+var mapboxApiKey = process.env.MAP_BOX_API_KEY || "";
+var mapboxBaseUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
 var GET_GEOGRAPHY = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, error_4;
+    var users, usersWithCoordinates, error_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, user_model_1.default.find({}).select("city state country role")];
+                _a.trys.push([0, 3, , 4]);
+                return [4 /*yield*/, user_model_1.default.find().select("country city state role")];
             case 1:
                 users = _a.sent();
-                // const mappedLocation = users.reduce((acc: any, country: any) => {
-                //   const countryISO = getCountryIso3(country);
-                //   if (!acc[country]) {
-                //     acc[countryISO] = 0;
-                //   }
-                //   acc[countryISO]++;
-                //   return acc;
-                // }, {});
-                // final format
-                // const formattedLocation = Object.entries(mappedLocation).map(
-                //   (country, count) => {
-                //     return {
-                //       id: country,
-                //       value: count,
-                //     };
-                //   }
-                // );
-                // console.log("MAPPED", mappedLocation);
-                res.status(200).json({ msg: "GEO", counts: users.length, users: users });
-                return [3 /*break*/, 3];
+                return [4 /*yield*/, Promise.all(users.map(function (user) { return __awaiter(void 0, void 0, void 0, function () {
+                        var location_1, url, response, _a, longitude, latitude, error_5;
+                        return __generator(this, function (_b) {
+                            switch (_b.label) {
+                                case 0:
+                                    console.log("user", user);
+                                    if (!(user.country && user.city)) return [3 /*break*/, 4];
+                                    _b.label = 1;
+                                case 1:
+                                    _b.trys.push([1, 3, , 4]);
+                                    location_1 = "".concat(user.city, ", ").concat(user.country);
+                                    url = "".concat(mapboxBaseUrl).concat(encodeURIComponent(location_1), ".json?access_token=").concat(mapboxApiKey);
+                                    return [4 /*yield*/, axios_1.default.get(url)];
+                                case 2:
+                                    response = _b.sent();
+                                    if (response.data.features.length > 0) {
+                                        _a = response.data.features[0].center, longitude = _a[0], latitude = _a[1];
+                                        return [2 /*return*/, __assign(__assign({}, user.toObject()), { coordinates: { latitude: latitude, longitude: longitude } })];
+                                    }
+                                    return [3 /*break*/, 4];
+                                case 3:
+                                    error_5 = _b.sent();
+                                    console.error("Geocoding error:", error_5.message);
+                                    return [3 /*break*/, 4];
+                                case 4: return [2 /*return*/, user];
+                            }
+                        });
+                    }); }))];
             case 2:
+                usersWithCoordinates = _a.sent();
+                res.status(200).json({
+                    msg: "Geo",
+                    counts: usersWithCoordinates.length,
+                    users: usersWithCoordinates,
+                });
+                return [3 /*break*/, 4];
+            case 3:
                 error_4 = _a.sent();
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
 }); };

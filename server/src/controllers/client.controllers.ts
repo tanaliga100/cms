@@ -1,4 +1,6 @@
+require("dotenv").config();
 // import { getCountryIso3 } from "country-iso-2-to-3";
+import axios from "axios";
 import { NextFunction, Request, Response } from "express";
 import Product from "../models/product.model";
 import ProductStat from "../models/productStats.model";
@@ -115,6 +117,8 @@ export const GET_TRANSACTIONS = async (
   }
 };
 
+const mapboxApiKey: string = process.env.MAP_BOX_API_KEY || "";
+const mapboxBaseUrl = "https://api.mapbox.com/geocoding/v5/mapbox.places/";
 export const GET_GEOGRAPHY = async (
   req: Request,
   res: Response,
@@ -122,27 +126,39 @@ export const GET_GEOGRAPHY = async (
 ) => {
   try {
     // grab the user and select the id
-    const users = await User.find({}).select("city state country role");
-    // const mappedLocation = users.reduce((acc: any, country: any) => {
-    //   const countryISO = getCountryIso3(country);
-    //   if (!acc[country]) {
-    //     acc[countryISO] = 0;
-    //   }
-    //   acc[countryISO]++;
-    //   return acc;
-    // }, {});
+    const users = await User.find().select("country city state role");
+    // MAPBOX TESTING ..........
+    const usersWithCoordinates = await Promise.all(
+      users.map(async (user) => {
+        console.log("user", user);
+        if (user.country && user.city) {
+          try {
+            const location = `${user.city}, ${user.country}`;
+            const url = `${mapboxBaseUrl}${encodeURIComponent(
+              location
+            )}.json?access_token=${mapboxApiKey}`;
 
-    // final format
-    // const formattedLocation = Object.entries(mappedLocation).map(
-    //   (country, count) => {
-    //     return {
-    //       id: country,
-    //       value: count,
-    //     };
-    //   }
-    // );
-    // console.log("MAPPED", mappedLocation);
+            const response = await axios.get(url);
 
-    res.status(200).json({ msg: "GEO", counts: users.length, users });
+            if (response.data.features.length > 0) {
+              const [longitude, latitude] = response.data.features[0].center;
+              return {
+                ...user.toObject(),
+                coordinates: { latitude, longitude },
+              };
+            }
+          } catch (error: any) {
+            console.error("Geocoding error:", error.message);
+          }
+        }
+        return user;
+      })
+    );
+
+    res.status(200).json({
+      msg: "Geo",
+      counts: usersWithCoordinates.length,
+      users: usersWithCoordinates,
+    });
   } catch (error) {}
 };

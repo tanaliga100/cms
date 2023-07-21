@@ -7,10 +7,10 @@ export const GET_SALES = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const overview = await OverAllStat.find({});
+    const overAllStats = await OverAllStat.find();
     res
       .status(200)
-      .json({ msg: "All Stats", counts: overview.length, overview });
+      .json({ msg: "Over All Stats", overAllStats: overAllStats[0] });
   } catch (error) {
     res.status(404).json({ msg: "Error Occured" });
   }

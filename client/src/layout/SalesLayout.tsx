@@ -18,25 +18,13 @@ const SalesLayout = () => {
           // counts={<PriceCheckIcon />}
           icon={<PriceCheckIcon />}
         />
-        <FlexRowWrapper gap={5}>
-          {/* <NavLink className="link" to="." relative="path" end>
-            <Typography variant="h4" fontWeight={800}>
-              Sales
-            </Typography>
-          </NavLink>
-          <NavLink className="link" to=".">
-            <Typography variant="h4" fontWeight={800}>
-              Units
-            </Typography>
-          </NavLink> */}
-        </FlexRowWrapper>
       </FlexRowWrapper>
       <Divider light />
       {/* ENTIRETY OF THE PAGE  */}
       {data.isLoading ? (
         <LoadingWrapper isLoading={data.isLoading} />
       ) : (
-        <Outlet context={data} />
+          <Outlet context={data} />
       )}
     </Box>
   );

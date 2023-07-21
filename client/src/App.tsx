@@ -15,6 +15,8 @@ import CustomersPage from "./pages/customers/CustomersPage";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import GeoPage from "./pages/geo/GeoPage";
 import ProductsPage from "./pages/products/ProductsPage";
+import Breakdown from "./pages/sales/Breakdown";
+import MonthlyPage from "./pages/sales/MonthlyPage";
 import SalesPage from "./pages/sales/SalesPage";
 import TransactionsPage from "./pages/transactions/TransactionsPage";
 import { themeSettings } from "./theme";
@@ -45,6 +47,8 @@ function App() {
 
             <Route path="/overview" element={<SalesLayout />}>
               <Route index element={<SalesPage />} />
+              <Route path="monthly" element={<MonthlyPage />} />
+              <Route path="breakdown" element={<Breakdown />} />
             </Route>
           </Route>
         </Routes>

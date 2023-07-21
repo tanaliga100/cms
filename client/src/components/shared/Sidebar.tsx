@@ -117,7 +117,7 @@ const Sidebar: React.FC<Props> = (props) => {
               </FlexRowWrapper>
             </Box>
             <List>
-              {navItems.map(({ text, icon }) => {
+              {navItems.map(({ text, route, icon }) => {
                 if (!icon) {
                   return (
                     <Typography
@@ -129,11 +129,12 @@ const Sidebar: React.FC<Props> = (props) => {
                   );
                 }
                 const lcText = text.toLowerCase();
+                const path = route.toLowerCase();
                 return (
                   <ListItem key={text} disablePadding>
                     <ListItemButton
                       onClick={() => {
-                        navigate(`/${lcText}`);
+                        navigate(`/${path}`);
                         setActive(lcText);
                       }}
                       sx={{
@@ -234,20 +235,29 @@ export default Sidebar;
 interface NavItem {
   text: string;
   icon: React.ReactNode;
+  route: string;
 }
 
 const navItems: NavItem[] = [
-  { text: "Dashboard", icon: <HomeOutlined /> },
-  { text: "Client Facing", icon: null },
-  { text: "Products", icon: <ShoppingCartOutlined /> },
-  { text: "Customers", icon: <HomeOutlined /> },
-  { text: "Transactions", icon: <PointOfSaleOutlined /> },
-  { text: "Geography", icon: <PublicOutlined /> },
-  { text: "Sales", icon: null },
-  { text: "Overview", icon: <TodayOutlined /> },
-  { text: "Monthly", icon: <CalendarMonthOutlined /> },
-  { text: "Breakdown", icon: <PieChartOutline /> },
-  { text: "Management", icon: null },
-  { text: "Admin", icon: <AdminPanelSettingsOutlined /> },
-  { text: "Performance", icon: <TrendingUpOutlined /> },
+  { route: "dashboard", text: "Dashboard", icon: <HomeOutlined /> },
+  { route: "/", text: "Client Facing", icon: null },
+  { route: "products", text: "Products", icon: <ShoppingCartOutlined /> },
+  { route: "customers", text: "Customers", icon: <HomeOutlined /> },
+  {
+    route: "transactions",
+    text: "Transactions",
+    icon: <PointOfSaleOutlined />,
+  },
+  { route: "geography", text: "Geography", icon: <PublicOutlined /> },
+  { route: "/", text: "Sales", icon: null },
+  { route: "overview", text: "Overview", icon: <TodayOutlined /> },
+  {
+    route: "overview/monthly",
+    text: "Monthly",
+    icon: <CalendarMonthOutlined />,
+  },
+  { route: "overview/breakdown", text: "Breakdown", icon: <PieChartOutline /> },
+  { route: "management", text: "Management", icon: null },
+  { route: "admin", text: "Admin", icon: <AdminPanelSettingsOutlined /> },
+  { route: "performance", text: "Performance", icon: <TrendingUpOutlined /> },
 ];

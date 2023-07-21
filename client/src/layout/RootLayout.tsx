@@ -17,24 +17,6 @@ const RootLayout = () => {
 
   // CHECK STATUS BEFORE PASSING AS PROPS
 
-  // if (data.error) {
-  //   return (
-  //     <Box>
-  //       <Typography
-  //         variant="h3"
-  //         fontWeight="bold"
-  //         textAlign="center"
-  //         p="5rem 5rem 1rem 5rem"
-  //       >
-  //         {(data.error as FetchBaseQueryError).status || "Error Occured !"}
-  //       </Typography>
-  //       <Typography variant="h6" textAlign="center">
-  //         Network Error !
-  //       </Typography>
-  //     </Box>
-  //   );
-  // }
-
   return (
     <Box width="100%" height="100%" display={isNonMobile ? "flex" : "block"}>
       {data.isLoading ? (
@@ -62,9 +44,7 @@ const RootLayout = () => {
         {data.isLoading ? (
           <LoadingWrapper isLoading={data.isLoading} />
         ) : (
-          <>
-            <Outlet />
-          </>
+          <Outlet />
         )}
       </Box>
     </Box>

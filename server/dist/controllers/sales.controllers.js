@@ -42,17 +42,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.GET_SALES = void 0;
 var overAllStats_model_1 = __importDefault(require("../models/overAllStats.model"));
 var GET_SALES = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var overview, error_1;
+    var overAllStats, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, overAllStats_model_1.default.find({})];
+                return [4 /*yield*/, overAllStats_model_1.default.find()];
             case 1:
-                overview = _a.sent();
+                overAllStats = _a.sent();
                 res
                     .status(200)
-                    .json({ msg: "All Stats", counts: overview.length, overview: overview });
+                    .json({ msg: "Over All Stats", overAllStats: overAllStats[0] });
                 return [3 /*break*/, 3];
             case 2:
                 error_1 = _a.sent();

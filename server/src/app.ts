@@ -13,6 +13,7 @@ import salesRoutes from "./routes/sales.routes";
 
 // CONFIGURATIONS
 dotenv.config();
+
 const app = express();
 app.use(express.json());
 app.use(helmet());
