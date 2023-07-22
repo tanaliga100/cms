@@ -32,8 +32,8 @@ const SalesOverview = ({ data }: IProps) => {
             onChange={(e) => setView(e.target.value)}
             labelId="demo-select-small-label"
           >
-            <MenuItem value="Sales">Sales</MenuItem>
-            <MenuItem value="Units">Units</MenuItem>
+            <MenuItem value="sales">Sales</MenuItem>
+            <MenuItem value="units">Units</MenuItem>
           </Select>
         </FormControl>
         {/* OverViewChart  */}

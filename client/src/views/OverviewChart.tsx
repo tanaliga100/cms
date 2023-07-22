@@ -4,46 +4,79 @@ import { useMemo } from "react";
 interface IProps {
   view?: string;
   isDashboard?: boolean;
-  data?: any;
+  data?: Data;
 }
 
-const OverViewChart: React.FC<IProps> = ({ view, data, isDashboard }) => {
+interface DailyData {
+  _id: string;
+  date: string;
+  totalSales: number;
+  totalUnits: number;
+}
+interface MonthlyData {
+  _id: string;
+  month: string;
+  totalSales: number;
+  totalUnits: number;
+}
+interface Data {
+  __v: number;
+  _id: string;
+  createdAt: string;
+  totalCustomers: number;
+  updatedAt: string;
+  year: number;
+  yearlyTotalSales: number;
+  yearlyTotalSoldUnits: number;
+  dailyData: DailyData[];
+  monthlyData: MonthlyData[];
+  salesByCategory: {
+    accessories: number;
+    clothing: number;
+    misc: number;
+    shoes: number;
+  };
+}
+
+const OverViewChart: React.FC<IProps> = (props: IProps) => {
   const theme = useTheme();
-  console.log("chrt", data);
+  console.log("DATA", props.data);
+
+  //   console.log("ACTIVE VIEW", props.view);
+
+  //   console.log("chrt", data);
 
   //   FORMAT THE DATE HERE...
-  const [totalSalesLine, totalUnitsLine] = useMemo<
-    [TotalSalesLine, TotalUnitsLine]
-  >(() => {
-    if (!data)
+  const [totalSalesLine, totalUnitsLine] = useMemo(() => {
+    if (!props.data)
       return [
         { id: "", color: "", data: [] },
         { id: "", color: "", data: [] },
       ];
 
-    const { monthlyData } = data as YourData;
+    const { monthlyData } = props.data;
 
-    const totalSalesLine: any = {
+    const totalSalesLine: TotalSalesLine = {
       id: "totalSales",
-      //  color: theme.palette.secondary.main,
+      color: theme.palette.secondary.main,
       data: [],
     };
-    const totalUnitsLine: any = {
+    const totalUnitsLine: TotalUnitsLine = {
       id: "totalUnits",
-      //  color: theme.palette.secondary.contrastText,
+      color: theme.palette.primary.main,
       data: [],
     };
+
     Object.values(monthlyData).reduce(
       (accumulator, { month, totalSales, totalUnits }) => {
         const currentSales = accumulator.sales + totalSales;
         const currentUnits = accumulator.units + totalUnits;
 
-        // assign the values
+        // assign the values for both SALES AND UNITS
         totalSalesLine.data = [
           ...totalSalesLine.data,
           { x: month, y: currentSales },
         ];
-
         totalUnitsLine.data = [
           ...totalUnitsLine.data,
           { x: month, y: currentUnits },
@@ -54,286 +87,24 @@ const OverViewChart: React.FC<IProps> = ({ view, data, isDashboard }) => {
       { sales: 0, units: 0 }
     );
 
-    return [totalSalesLine, totalUnitsLine];
-  }, [data]);
+    return [[totalSalesLine], [totalUnitsLine]];
+  }, [props.data]);
 
-  const chartData = [
-    {
-      id: "japan",
-      color: "hsl(4, 70%, 50%)",
-      data: [
-        {
-          x: "plane",
-          y: 144,
-        },
-        {
-          x: "helicopter",
-          y: 241,
-        },
-        {
-          x: "boat",
-          y: 258,
-        },
-        {
-          x: "train",
-          y: 276,
-        },
-        {
-          x: "subway",
-          y: 269,
-        },
-        {
-          x: "bus",
-          y: 251,
-        },
-        {
-          x: "car",
-          y: 19,
-        },
-        {
-          x: "moto",
-          y: 300,
-        },
-        {
-          x: "bicycle",
-          y: 42,
-        },
-        {
-          x: "horse",
-          y: 83,
-        },
-        {
-          x: "skateboard",
-          y: 117,
-        },
-        {
-          x: "others",
-          y: 103,
-        },
-      ],
-    },
-    {
-      id: "france",
-      color: "hsl(121, 70%, 50%)",
-      data: [
-        {
-          x: "plane",
-          y: 205,
-        },
-        {
-          x: "helicopter",
-          y: 240,
-        },
-        {
-          x: "boat",
-          y: 74,
-        },
-        {
-          x: "train",
-          y: 87,
-        },
-        {
-          x: "subway",
-          y: 131,
-        },
-        {
-          x: "bus",
-          y: 109,
-        },
-        {
-          x: "car",
-          y: 11,
-        },
-        {
-          x: "moto",
-          y: 7,
-        },
-        {
-          x: "bicycle",
-          y: 253,
-        },
-        {
-          x: "horse",
-          y: 138,
-        },
-        {
-          x: "skateboard",
-          y: 27,
-        },
-        {
-          x: "others",
-          y: 263,
-        },
-      ],
-    },
-    {
-      id: "us",
-      color: "hsl(351, 70%, 50%)",
-      data: [
-        {
-          x: "plane",
-          y: 237,
-        },
-        {
-          x: "helicopter",
-          y: 85,
-        },
-        {
-          x: "boat",
-          y: 171,
-        },
-        {
-          x: "train",
-          y: 297,
-        },
-        {
-          x: "subway",
-          y: 22,
-        },
-        {
-          x: "bus",
-          y: 171,
-        },
-        {
-          x: "car",
-          y: 13,
-        },
-        {
-          x: "moto",
-          y: 60,
-        },
-        {
-          x: "bicycle",
-          y: 217,
-        },
-        {
-          x: "horse",
-          y: 70,
-        },
-        {
-          x: "skateboard",
-          y: 216,
-        },
-        {
-          x: "others",
-          y: 221,
-        },
-      ],
-    },
-    {
-      id: "germany",
-      color: "hsl(13, 70%, 50%)",
-      data: [
-        {
-          x: "plane",
-          y: 84,
-        },
-        {
-          x: "helicopter",
-          y: 47,
-        },
-        {
-          x: "boat",
-          y: 74,
-        },
-        {
-          x: "train",
-          y: 200,
-        },
-        {
-          x: "subway",
-          y: 124,
-        },
-        {
-          x: "bus",
-          y: 110,
-        },
-        {
-          x: "car",
-          y: 70,
-        },
-        {
-          x: "moto",
-          y: 193,
-        },
-        {
-          x: "bicycle",
-          y: 243,
-        },
-        {
-          x: "horse",
-          y: 87,
-        },
-        {
-          x: "skateboard",
-          y: 170,
-        },
-        {
-          x: "others",
-          y: 45,
-        },
-      ],
-    },
-    {
-      id: "norway",
-      color: "hsl(231, 70%, 50%)",
-      data: [
-        {
-          x: "plane",
-          y: 216,
-        },
-        {
-          x: "helicopter",
-          y: 176,
-        },
-        {
-          x: "boat",
-          y: 77,
-        },
-        {
-          x: "train",
-          y: 209,
-        },
-        {
-          x: "subway",
-          y: 295,
-        },
-        {
-          x: "bus",
-          y: 70,
-        },
-        {
-          x: "car",
-          y: 91,
-        },
-        {
-          x: "moto",
-          y: 150,
-        },
-        {
-          x: "bicycle",
-          y: 146,
-        },
-        {
-          x: "horse",
-          y: 211,
-        },
-        {
-          x: "skateboard",
-          y: 256,
-        },
-        {
-          x: "others",
-          y: 178,
-        },
-      ],
-    },
-  ];
+  console.log("TOTAL SALES", totalSalesLine);
+  console.log("TOTAL UNITS", totalUnitsLine);
 
   return (
-    <Box sx={{ width: "95%", height: "95%", margin: "0 auto" }}>
+    <Box
+      sx={{
+        width: "95%",
+        height: "100%",
+        margin: "0 auto",
+        color: theme.palette.text.secondary,
+        padding: "0 1rem 0rem 1rem",
+      }}
+    >
       <ResponsiveLine
-        data={chartData}
+        data={props.view === "sales" ? totalSalesLine : totalUnitsLine}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
         yScale={{
@@ -351,24 +122,29 @@ const OverViewChart: React.FC<IProps> = ({ view, data, isDashboard }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "transportation",
-          legendOffset: 36,
+          legend: "Monthy Data",
+          legendOffset: 40,
           legendPosition: "middle",
         }}
         axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "count",
-          legendOffset: -40,
+          tickSize: 10,
+          tickPadding: 10,
+          tickRotation: 10,
+          legend: "SALES",
+          legendOffset: 20,
           legendPosition: "middle",
         }}
         enableGridX={false}
-        pointSize={5}
-        pointColor={{ theme: "labels.text.fill" }}
+        enableGridY={false}
+        colors={theme.palette.secondary.main}
+        lineWidth={1}
+        pointSize={14}
+        pointColor={{ from: "color", modifiers: [] }}
+        pointBorderWidth={4}
         pointBorderColor={{ from: "serieColor" }}
         enablePointLabel={true}
-        pointLabelYOffset={-15}
+        pointLabelYOffset={-12}
+        enableArea={true}
         areaOpacity={0.05}
         useMesh={true}
         legends={[
@@ -380,10 +156,10 @@ const OverViewChart: React.FC<IProps> = ({ view, data, isDashboard }) => {
             translateY: 0,
             itemsSpacing: 0,
             itemDirection: "left-to-right",
-            itemWidth: 59,
+            itemWidth: 80,
             itemHeight: 20,
             itemOpacity: 0.75,
-            symbolSize: 11,
+            symbolSize: 12,
             symbolShape: "circle",
             symbolBorderColor: "rgba(0, 0, 0, .5)",
             effects: [
