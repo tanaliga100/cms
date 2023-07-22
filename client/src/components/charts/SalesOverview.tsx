@@ -1,14 +1,29 @@
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-import { useState } from "react";
-import OverViewChart from "../../views/OverviewChart";
+import {
+  Box,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  useTheme,
+} from "@mui/material";
+import { ResponsiveBump } from "@nivo/bump";
+import { useMemo, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { FormatMonthlyData } from "../../utils/formatMonhtlyData";
 import { FlexColumnWrapper } from "../wrapper/Wrapper";
 
-interface IProps {
-  data: any;
-}
+const OverviewChart: React.FC = () => {
+  // CONTEXT
+  const ctx = useOutletContext<any>();
+  const data: any = ctx.data.overAllStats;
 
-const SalesOverview = ({ data }: IProps) => {
+  // HOOKS & THEMES
   const [view, setView] = useState<any>("");
+  const theme = useTheme();
+
+  // FORMAT DATA
+  const memo: any = useMemo(() => FormatMonthlyData(data), [data]);
+  console.log("MEMO", memo);
 
   return (
     <Box
@@ -36,13 +51,63 @@ const SalesOverview = ({ data }: IProps) => {
             <MenuItem value="units">Units</MenuItem>
           </Select>
         </FormControl>
-        {/* OverViewChart  */}
-        <Box sx={{ height: "50vh" }}>
-          <OverViewChart data={data} view={view} />
+        <Box
+          sx={{
+            height: "50vh",
+            width: "90%",
+            margin: "0 auto",
+            color: theme.palette.secondary.main,
+            padding: "0 1rem 0rem 1rem",
+            boxShadow: "0px 5px 0px 0px",
+          }}
+        >
+          <ResponsiveBump
+            //   data={view === "sales" ? memo[0].data : memo[1].data}
+            //   data={view === "sales" ? totalSalesLine : totalUnitsLine}
+            data={memo}
+            colors={{ scheme: "pastel1" }}
+            lineWidth={1}
+            activeLineWidth={6}
+            inactiveLineWidth={3}
+            inactiveOpacity={0.15}
+            pointSize={10}
+            activePointSize={16}
+            inactivePointSize={0}
+            //   pointColor={{ theme: "background" }}
+            pointBorderWidth={3}
+            activePointBorderWidth={3}
+            //   pointBorderColor={{ from: "serie.color" }}
+            axisTop={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "",
+              legendPosition: "middle",
+              legendOffset: -36,
+            }}
+            axisBottom={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              legend: "",
+              legendPosition: "middle",
+              legendOffset: 32,
+            }}
+            axisLeft={{
+              tickSize: 5,
+              tickPadding: 5,
+              tickRotation: 0,
+              //     legend: "ranking",
+              legendPosition: "middle",
+              legendOffset: -40,
+            }}
+            margin={{ top: 40, right: 100, bottom: 40, left: 60 }}
+            axisRight={null}
+          />
         </Box>
       </FlexColumnWrapper>
     </Box>
   );
 };
 
-export default SalesOverview;
+export default OverviewChart;

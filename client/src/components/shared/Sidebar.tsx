@@ -252,6 +252,11 @@ const navItems: NavItem[] = [
   { route: "/", text: "Sales", icon: null },
   { route: "overview", text: "Overview", icon: <TodayOutlined /> },
   {
+    route: "overview/daily",
+    text: "Daily",
+    icon: <CalendarMonthOutlined />,
+  },
+  {
     route: "overview/monthly",
     text: "Monthly",
     icon: <CalendarMonthOutlined />,

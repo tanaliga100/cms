@@ -16,5 +16,8 @@
     "url": "https://github.com/tanaliga100/admin-dashboard/issues"
   },
   "homepage": "https://github.com/tanaliga100/admin-dashboard#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@nivo/bump": "^0.83.0"
+  }
 }

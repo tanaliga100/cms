@@ -87,3 +87,47 @@ export interface ISales {
   updatedAt: string;
   __v: number;
 }
+
+export interface Data {
+  __v: number;
+  _id: string;
+  createdAt: string;
+  totalCustomers: number;
+  updatedAt: string;
+  year: number;
+  yearlyTotalSales: number;
+  yearlyTotalSoldUnits: number;
+  dailyData: DailyData[];
+  monthlyData: MonthlyData[];
+  salesByCategory: {
+    accessories: number;
+    clothing: number;
+    misc: number;
+    shoes: number;
+  };
+}
+
+interface DailyData {
+  _id: string;
+  date: string;
+  totalSales: number;
+  totalUnits: number;
+}
+
+export interface MonthlyData {
+  month: string;
+  totalSales: number;
+  totalUnits: number;
+}
+
+export interface TotalSalesLine {
+  id?: string;
+  color?: string;
+  data?: { x: string; y: number }[];
+}
+
+export interface TotalUnitsLine {
+  id?: string;
+  color?: string;
+  data?: { x: string; y: number }[];
+}

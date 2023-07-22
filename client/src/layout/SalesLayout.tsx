@@ -24,7 +24,7 @@ const SalesLayout = () => {
       {data.isLoading ? (
         <LoadingWrapper isLoading={data.isLoading} />
       ) : (
-          <Outlet context={data} />
+        <Outlet context={data} />
       )}
     </Box>
   );
