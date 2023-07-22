@@ -1,23 +1,11 @@
 {
-  "name": "admin-dashboard",
+  "name": "cms",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jordan100",
-  "license": "ISC",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tanaliga100/admin-dashboard.git"
-  },
-  "keywords": [],
-  "bugs": {
-    "url": "https://github.com/tanaliga100/admin-dashboard/issues"
-  },
-  "homepage": "https://github.com/tanaliga100/admin-dashboard#readme",
-  "description": "",
-  "dependencies": {
-    "@nivo/bump": "^0.83.0"
-  }
+  "license": "ISC"
 }

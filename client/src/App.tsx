@@ -18,7 +18,6 @@ import ProductsPage from "./pages/products/ProductsPage";
 import Breakdown from "./pages/sales/Breakdown";
 import DailyPage from "./pages/sales/DailyPage";
 import MonthlyPage from "./pages/sales/MonthlyPage";
-import { default as OverviewPage } from "./pages/sales/OverviewPage";
 import TransactionsPage from "./pages/transactions/TransactionsPage";
 import { themeSettings } from "./theme";
 function App() {
@@ -31,10 +30,14 @@ function App() {
         <CssBaseline />
         <Routes>
           <Route element={<RootLayout />}>
-            <Route path="/" element={<Navigate to="dashboard" replace />} />
+            <Route
+              index
+              path="/"
+              element={<Navigate to="dashboard" replace />}
+            />
             <Route path="/dashboard" element={<DashboardPage />} />
-            <Route path="/products" element={<ProductsLayout />}>
-              <Route index element={<ProductsPage />} />
+            <Route path="products" element={<ProductsLayout />}>
+              <Route path="/products" element={<ProductsPage />} />
             </Route>
             <Route path="/customers" element={<CustomersLayout />}>
               <Route index element={<CustomersPage />} />
@@ -46,8 +49,8 @@ function App() {
               <Route index element={<GeoPage />} />
             </Route>
 
-            <Route path="/overview" element={<SalesLayout />}>
-              <Route index element={<OverviewPage />} />
+            <Route path="/sales" element={<SalesLayout />}>
+              {/* <Route index element={<OverviewPage />} /> */}
               <Route path="daily" element={<DailyPage />} />
               <Route path="monthly" element={<MonthlyPage />} />
               <Route path="breakdown" element={<Breakdown />} />

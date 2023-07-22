@@ -18,7 +18,7 @@ const Hero: React.FC<IProps> = (props) => {
       {props.isLoading ? (
         <LoadingWrapper isLoading={props.isLoading} />
       ) : (
-        <Box m="3rem  1.5rem 3rem 1.5rem">
+        <Box m="2rem  1.5rem 1rem 1.5rem">
           <Typography
             variant="h3"
             color="grey"

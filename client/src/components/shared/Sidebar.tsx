@@ -9,7 +9,6 @@ import {
   PublicOutlined,
   SettingsOutlined,
   ShoppingCartOutlined,
-  TodayOutlined,
   TrendingUpOutlined,
 } from "@mui/icons-material";
 import {
@@ -250,18 +249,18 @@ const navItems: NavItem[] = [
   },
   { route: "geography", text: "Geography", icon: <PublicOutlined /> },
   { route: "/", text: "Sales", icon: null },
-  { route: "overview", text: "Overview", icon: <TodayOutlined /> },
+  //   { route: "Sales", text: "Overview", icon: <TodayOutlined /> },
   {
-    route: "overview/daily",
+    route: "sales/daily",
     text: "Daily",
     icon: <CalendarMonthOutlined />,
   },
   {
-    route: "overview/monthly",
+    route: "sales/monthly",
     text: "Monthly",
     icon: <CalendarMonthOutlined />,
   },
-  { route: "overview/breakdown", text: "Breakdown", icon: <PieChartOutline /> },
+  { route: "sales/breakdown", text: "Breakdown", icon: <PieChartOutline /> },
   { route: "management", text: "Management", icon: null },
   { route: "admin", text: "Admin", icon: <AdminPanelSettingsOutlined /> },
   { route: "performance", text: "Performance", icon: <TrendingUpOutlined /> },
