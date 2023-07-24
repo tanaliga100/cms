@@ -60,7 +60,7 @@ const DailyChart = () => {
       }
     });
     const formattedData = [totalSalesLine, totalUnitsLine];
-    console.log("FORMATTED DATA", formattedData);
+    //     console.log("FORMATTED DATA", formattedData);
 
     return [formattedData];
   }, [data, startDate, endDate]);
@@ -109,10 +109,11 @@ const DailyChart = () => {
         </Box>
       </Box>
       {/* DAILY CHART */}
-      <Box sx={{ width: "90%", height: "70vh", padding: "2rem" }}>
+      <Box sx={{ width: "100%", height: "70vh", padding: "2rem" }}>
         <ResponsiveLine
           data={formattedData}
-          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+          colors={{ datum: "color" }}
+          margin={{ top: 50, right: 50, bottom: 70, left: 60 }}
           xScale={{ type: "point" }}
           yScale={{
             type: "linear",
@@ -127,17 +128,17 @@ const DailyChart = () => {
           axisBottom={{
             tickSize: 5,
             tickPadding: 5,
-            tickRotation: 0,
-            legend: "DATE RANGE",
-            legendOffset: 36,
+            tickRotation: 90,
+            //   legend: "DATE RANGE",
+            legendOffset: 60,
             legendPosition: "middle",
           }}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: "SALES ",
-            legendOffset: -40,
+            //   legend: "TOTAL ",
+            legendOffset: -50,
             legendPosition: "middle",
           }}
           enableGridX={false}
@@ -150,10 +151,10 @@ const DailyChart = () => {
           useMesh={true}
           legends={[
             {
-              anchor: "bottom-right",
+              anchor: "top-right",
               direction: "column",
               justify: false,
-              translateX: 100,
+              translateX: 20,
               translateY: 0,
               itemsSpacing: 0,
               itemDirection: "left-to-right",
