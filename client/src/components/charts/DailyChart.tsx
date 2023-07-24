@@ -1,5 +1,5 @@
 import { Box, FormControl, Typography, useTheme } from "@mui/material";
-import { ResponsiveBump } from "@nivo/bump";
+import { ResponsiveLine } from "@nivo/line";
 import { useMemo, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -110,21 +110,70 @@ const DailyChart = () => {
       </Box>
       {/* DAILY CHART */}
       <Box sx={{ width: "90%", height: "70vh", padding: "2rem" }}>
-        <ResponsiveBump
-          //   data={view === "sales" ? memo[0].data : memo[1].data}
-          //   data={view === "sales" ? totalSalesLine : totalUnitsLine}
+        <ResponsiveLine
           data={formattedData}
-          colors={{ scheme: "spectral" }}
-          lineWidth={3}
-          // activeLineWidth={6}
-          // inactiveLineWidth={3}
-          // inactiveOpacity={0.15}
-          // pointSize={5}
-          // activePointSize={16}
-          // inactivePointSize={0}
-          // pointBorderWidth={3}
-          // activePointBorderWidth={3}
-          margin={{ top: 20, right: 100, bottom: 40, left: 50 }}
+          margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+          xScale={{ type: "point" }}
+          yScale={{
+            type: "linear",
+            min: "auto",
+            max: "auto",
+            stacked: true,
+            reverse: false,
+          }}
+          yFormat=" >-.2f"
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "DATE RANGE",
+            legendOffset: 36,
+            legendPosition: "middle",
+          }}
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "SALES ",
+            legendOffset: -40,
+            legendPosition: "middle",
+          }}
+          enableGridX={false}
+          enableGridY={false}
+          pointSize={10}
+          pointColor={{ theme: "background" }}
+          pointBorderWidth={2}
+          pointBorderColor={{ from: "serieColor" }}
+          pointLabelYOffset={-12}
+          useMesh={true}
+          legends={[
+            {
+              anchor: "bottom-right",
+              direction: "column",
+              justify: false,
+              translateX: 100,
+              translateY: 0,
+              itemsSpacing: 0,
+              itemDirection: "left-to-right",
+              itemWidth: 80,
+              itemHeight: 20,
+              itemOpacity: 0.75,
+              symbolSize: 12,
+              symbolShape: "circle",
+              symbolBorderColor: "rgba(0, 0, 0, .5)",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemBackground: "rgba(0, 0, 0, .03)",
+                    itemOpacity: 1,
+                  },
+                },
+              ],
+            },
+          ]}
         />
       </Box>
     </Box>
